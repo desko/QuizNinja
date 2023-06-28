@@ -13,6 +13,7 @@ const SliderDifficulty = () => {
       defaultValue={0}
       min={0}
       max={2}
+      mb='6rem'
       onChange={(e) => console.log(e)}>
       <SliderMark pt='1rem' transform='translateX(-50%)' value={0}>
         {DIFFICULTY.EASY}
@@ -29,7 +30,7 @@ const SliderDifficulty = () => {
         ]} />
       </SliderTrack>
       <SliderThumb h='2rem' w='2rem'
-        transform='translate(-50%, -50%)' bg='orange.500' />
+        transform='translate(-50%, -50%) scale(1) !important' bg='orange.500' />
     </Slider>
   );
 };
