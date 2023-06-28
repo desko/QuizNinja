@@ -5,11 +5,11 @@ const LandingPage = () => {
   return (
     <>
       <Text
-        p='7rem 0'
-        maxW='75%'
+        p='1rem 0 4rem'
+        maxW='80%'
         m='0 auto'
         textAlign='center'
-        fontSize='4xl'
+        fontSize='3xl'
         fontWeight='bold'
         color='orange.600'>
         <strong>
