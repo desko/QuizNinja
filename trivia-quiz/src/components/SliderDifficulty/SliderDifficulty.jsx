@@ -14,6 +14,7 @@ const SliderDifficulty = () => {
       min={0}
       max={2}
       mb='6rem'
+      mt='1rem'
       onChange={(e) => console.log(e)}>
       <SliderMark pt='1rem' transform='translateX(-50%)' value={0}>
         {DIFFICULTY.EASY}

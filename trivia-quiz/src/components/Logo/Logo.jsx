@@ -7,7 +7,7 @@ const Logo = () => {
       <Image
         src={QuinNinjaLogo}
         alt='QuizNinja Logo'
-        width='30rem'
+        width='40rem'
         height='auto' />
     </Center>
   );
