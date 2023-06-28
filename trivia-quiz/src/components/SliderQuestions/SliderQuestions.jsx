@@ -14,6 +14,7 @@ const SliderQuestions = ({maxQuestions = 20}) => {
 
   return (
     <Slider aria-label='slider-ex-1'
+    pt='2rem'
       defaultValue={5}
       min={5}
       max={maxQuestions}
