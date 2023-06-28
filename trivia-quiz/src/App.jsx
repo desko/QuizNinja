@@ -2,7 +2,7 @@ import './App.css';
 import Container from './components/Container/Container';
 import Logo from './components/Logo/Logo';
 import {Route, Routes} from 'react-router-dom';
-import {LANDING_PAGE} from '../src/common/routes'
+import {LANDING_PAGE} from '../src/common/routes';
 import LandingPage from './pages/LandingPage/LandingPage';
 
 function App() {
