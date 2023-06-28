@@ -15,6 +15,7 @@ const SliderQuestions = ({maxQuestions = 20}) => {
   return (
     <Slider aria-label='slider-ex-1'
       mb='6rem'
+      mt='1rem'
       defaultValue={5}
       min={5}
       max={maxQuestions}
@@ -24,7 +25,7 @@ const SliderQuestions = ({maxQuestions = 20}) => {
         textAlign='center'
         bg='orange.500'
         color='white'
-        mt='-12'
+        mt='12'
         ml='-3'
         w='12'
         transform='translate(-50%, -50%)'
