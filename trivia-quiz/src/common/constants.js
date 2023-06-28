@@ -3,3 +3,5 @@ export const DIFFICULTY = {
   MEDIUM: 'medium',
   HARD: 'hard',
 };
+
+export const MIN_NUMBER_OF_QUESTIONS = 5;
