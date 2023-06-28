@@ -3,11 +3,11 @@ import QuinNinjaLogo from '../../assets/img/QuizNinja-Logo.png';
 
 const Logo = () => {
   return (
-    <Center pos='fixed' top='16px' width='100%' transform='translateX: -50%'>
+    <Center paddingY='2rem' width='100%'>
       <Image
         src={QuinNinjaLogo}
         alt='QuizNinja Logo'
-        width='300px'
+        width='30rem'
         height='auto' />
     </Center>
   );

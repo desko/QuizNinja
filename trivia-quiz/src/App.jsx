@@ -1,11 +1,13 @@
 import './App.css';
+import Container from './components/Container/Container';
 import Logo from './components/Logo/Logo';
 
 function App() {
   return (
     <div className="wrapper">
-      <Logo />
-      <h1>Hello</h1>
+      <Container>
+        <Logo />
+      </Container>
     </div>
   );
 }
