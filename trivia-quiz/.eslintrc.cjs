@@ -16,5 +16,6 @@ module.exports = {
     'require-jsdoc': 0,
     'react/react-in-jsx-scope': 'off',
     'react/prop-types': ['off'],
+    'max-len': ['error', {'code': 120}],
   },
 };

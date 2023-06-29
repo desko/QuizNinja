@@ -11,8 +11,17 @@ import SliderDifficulty
 import Select from '../Select/Select';
 import SliderQuestions from '../SliderQuestions/SliderQuestions';
 import Btn from '../Btn/Btn';
+import {useQuery} from '@tanstack/react-query';
+import {fetchCategories} from '../../services/quiz.service';
 
 const FormQuiz = ({submitHandler} ) => {
+  const {isLoading, error, data: quizCategories} = useQuery({
+    queryKey: ['quizCategories'],
+    queryFn: fetchCategories,
+  });
+
+  console.log(quizCategories);
+
   const buttonClickHandler = (e) => {
     console.log('click');
   };
@@ -41,7 +50,7 @@ const FormQuiz = ({submitHandler} ) => {
       <form onSubmit={submitHandler} style={{display: 'contents'}}>
         <FormControl display='contents' >
           <FormLabel>Select Category:</FormLabel>
-          <Select changeHandler={selectChangeHandler} />
+          <Select changeHandler={selectChangeHandler} options={quizCategories} />
           <FormErrorMessage></FormErrorMessage>
 
           <FormLabel>Choose Diffuculty:</FormLabel>
