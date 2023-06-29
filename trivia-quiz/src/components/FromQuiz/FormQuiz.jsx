@@ -24,7 +24,10 @@ const FormQuiz = ({submitHandler} ) => {
   });
   const [category, setCategory] = useState(null);
 
-  const {isLoading: isLoadingQuestions, error: errorQuestions, data: quizQuestions, refetch: refetchSliderCount} = useQuery({
+  const {isLoading: isLoadingQuestions,
+    error: errorQuestions,
+    data: quizQuestions,
+    refetch: refetchSliderCount} = useQuery({
     queryKey: ['quizQuestions'],
     queryFn: () => category && fetchQuestionCountByCategoryAndType(category, difficulty),
     enabled: true,
@@ -36,21 +39,15 @@ const FormQuiz = ({submitHandler} ) => {
 
   const difficultyChangeHandler = (e) => {
     setDifficulty(SLIDER_DIFFICULTY[e]);
-    console.log('change diff');
-    console.table(difficulty, category);
-    refetchSliderCount();
   };
 
   const selectChangeHandler = (e) => {
     setCategory(e.target.value);
-    console.log('change cat');
-    console.table(difficulty, category);
-    refetchSliderCount();
   };
 
   useEffect(() => {
-    console.table(difficulty, category);
-  }, []);
+    refetchSliderCount();
+  }, [difficulty, category, refetchSliderCount]);
 
   if (isLoadingCategs) return <p>Loading...</p>;
 
