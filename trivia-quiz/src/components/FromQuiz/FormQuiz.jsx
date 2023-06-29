@@ -18,11 +18,11 @@ import {SLIDER_DIFFICULTY, DIFFICULTY} from '../../common/constants';
 
 const FormQuiz = ({submitHandler} ) => {
   const [difficulty, setDifficulty] = useState(DIFFICULTY.EASY.NAME);
+  const [category, setCategory] = useState(null);
   const {isLoading: isLoadingCategs, error: errorCategories, data: quizCategories} = useQuery({
     queryKey: ['quizCategories'],
     queryFn: fetchCategories,
   });
-  const [category, setCategory] = useState(null);
 
   const {isLoading: isLoadingQuestions,
     error: errorQuestions,
@@ -78,11 +78,16 @@ const FormQuiz = ({submitHandler} ) => {
           <SliderDifficulty changeHandler={difficultyChangeHandler} />
           <FormErrorMessage></FormErrorMessage>
 
-          <FormLabel>Question Count:</FormLabel>
-          <SliderQuestions />
+          {quizQuestions && (
+            <>
+              <FormLabel>Question Count:</FormLabel>
+              <SliderQuestions maxQuestions={quizQuestions} />
+            </>
+          ) }
           <FormErrorMessage></FormErrorMessage>
 
           <Btn
+            disabled={quizQuestions ? false : true}
             alignSelf='center'
             text={'start quiz'}
             clickHandler={buttonClickHandler} />

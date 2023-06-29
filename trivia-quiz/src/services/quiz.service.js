@@ -10,7 +10,6 @@ export const fetchCategories = async () => {
 };
 
 export const fetchQuestionCountByCategoryAndType = async (category, difficulty) => {
-  console.log(category, difficulty);
   const categoryUrl = `https://opentdb.com/api_count.php?category=${category}`;
 
   const fetchQuestionsCount = async (category, difficulty, amount) => {
@@ -34,8 +33,6 @@ export const fetchQuestionCountByCategoryAndType = async (category, difficulty) 
     // Array of all questions from the category
     const questions = await fetchQuestionsCount(category, difficulty, questionCount);
     const filteredQuestions = questions?.filter((question) => question.type === 'multiple');
-    console.log(filteredQuestions);
-    console.log(filteredQuestions.length);
     return filteredQuestions.length;
   } catch (error) {
     console.error('Error fetching questions:', error);
