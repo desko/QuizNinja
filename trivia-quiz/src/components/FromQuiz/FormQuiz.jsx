@@ -12,23 +12,44 @@ import Select from '../Select/Select';
 import SliderQuestions from '../SliderQuestions/SliderQuestions';
 import Btn from '../Btn/Btn';
 import {useQuery} from '@tanstack/react-query';
-import {fetchCategories} from '../../services/quiz.service';
+import {fetchCategories, fetchQuestionCountByCategoryAndType} from '../../services/quiz.service';
+import {useEffect, useState} from 'react';
+import {SLIDER_DIFFICULTY, DIFFICULTY} from '../../common/constants';
 
 const FormQuiz = ({submitHandler} ) => {
-  const {isLoading, error, data: quizCategories} = useQuery({
+  const [difficulty, setDifficulty] = useState(DIFFICULTY.EASY.NAME);
+  const [category, setCategory] = useState(null);
+  const {isLoading: isLoadingCategs, error: errorCategories, data: quizCategories} = useQuery({
     queryKey: ['quizCategories'],
     queryFn: fetchCategories,
   });
 
-  console.log(quizCategories);
+  const {isLoading: isLoadingQuestions,
+    error: errorQuestions,
+    data: quizQuestions,
+    refetch: refetchSliderCount} = useQuery({
+    queryKey: ['quizQuestions'],
+    queryFn: () => category && fetchQuestionCountByCategoryAndType(category, difficulty),
+    enabled: true,
+  });
 
   const buttonClickHandler = (e) => {
     console.log('click');
   };
 
-  const selectChangeHandler = (e) => {
-    console.log(e.target.value);
+  const difficultyChangeHandler = (e) => {
+    setDifficulty(SLIDER_DIFFICULTY[e]);
   };
+
+  const selectChangeHandler = (e) => {
+    setCategory(e.target.value);
+  };
+
+  useEffect(() => {
+    refetchSliderCount();
+  }, [difficulty, category, refetchSliderCount]);
+
+  if (isLoadingCategs) return <p>Loading...</p>;
 
   return (
     <Card
@@ -54,14 +75,19 @@ const FormQuiz = ({submitHandler} ) => {
           <FormErrorMessage></FormErrorMessage>
 
           <FormLabel>Choose Diffuculty:</FormLabel>
-          <SliderDifficulty />
+          <SliderDifficulty changeHandler={difficultyChangeHandler} />
           <FormErrorMessage></FormErrorMessage>
 
-          <FormLabel>Question Count:</FormLabel>
-          <SliderQuestions />
+          {quizQuestions && (
+            <>
+              <FormLabel>Question Count:</FormLabel>
+              <SliderQuestions maxQuestions={quizQuestions} />
+            </>
+          ) }
           <FormErrorMessage></FormErrorMessage>
 
           <Btn
+            disabled={quizQuestions ? false : true}
             alignSelf='center'
             text={'start quiz'}
             clickHandler={buttonClickHandler} />

@@ -5,9 +5,9 @@ import {
   SliderThumb,
   SliderMark,
 } from '@chakra-ui/react';
-import {DIFFICULTY, SLIDER_DIFFICULTY} from '../../common/constants.js';
+import {DIFFICULTY} from '../../common/constants.js';
 
-const SliderDifficulty = () => {
+const SliderDifficulty = ( {changeHandler} ) => {
   return (
     <Slider aria-label='slider-ex-1'
       defaultValue={DIFFICULTY.EASY.VALUE}
@@ -15,7 +15,7 @@ const SliderDifficulty = () => {
       max={DIFFICULTY.HARD.VALUE}
       mb='6rem'
       mt='1rem'
-      onChange={(e) => console.log(SLIDER_DIFFICULTY[e])}>
+      onChange={changeHandler}>
       <SliderMark pt='1rem' transform='translateX(-50%)' value={0}>
         {DIFFICULTY.EASY.NAME}
       </SliderMark>
