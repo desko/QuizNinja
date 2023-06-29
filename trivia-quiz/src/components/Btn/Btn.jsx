@@ -1,6 +1,6 @@
 import {Button} from '@chakra-ui/react';
 
-const Btn = ( {clickHandler, text, disabled, type='submit'} ) => {
+const Btn = ( {clickHandler = () => {}, text, disabled, type='submit'} ) => {
   return (
     <Button
       alignSelf='center'

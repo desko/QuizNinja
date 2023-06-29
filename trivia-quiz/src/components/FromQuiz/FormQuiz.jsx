@@ -15,10 +15,13 @@ import {useQuery} from '@tanstack/react-query';
 import {fetchCategories, fetchQuestionCountByCategoryAndType} from '../../services/quiz.service';
 import {useEffect, useState} from 'react';
 import {SLIDER_DIFFICULTY, DIFFICULTY} from '../../common/constants';
+import {useNavigate} from 'react-router-dom';
+import {QUIZ_PAGE} from '../../common/routes';
 
-const FormQuiz = ({submitHandler} ) => {
+const FormQuiz = () => {
   const [difficulty, setDifficulty] = useState(DIFFICULTY.EASY.NAME);
   const [category, setCategory] = useState(null);
+  const navigate = useNavigate();
   const {isLoading: isLoadingCategs, error: errorCategories, data: quizCategories} = useQuery({
     queryKey: ['quizCategories'],
     queryFn: fetchCategories,
@@ -33,9 +36,6 @@ const FormQuiz = ({submitHandler} ) => {
     enabled: true,
   });
 
-  const buttonClickHandler = (e) => {
-    console.log('click');
-  };
 
   const difficultyChangeHandler = (e) => {
     setDifficulty(SLIDER_DIFFICULTY[e]);
@@ -43,6 +43,11 @@ const FormQuiz = ({submitHandler} ) => {
 
   const selectChangeHandler = (e) => {
     setCategory(e.target.value);
+  };
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    navigate(QUIZ_PAGE);
   };
 
   useEffect(() => {
@@ -89,8 +94,7 @@ const FormQuiz = ({submitHandler} ) => {
           <Btn
             disabled={quizQuestions ? false : true}
             alignSelf='center'
-            text={'start quiz'}
-            clickHandler={buttonClickHandler} />
+            text={'start quiz'} />
         </FormControl>
       </form>
     </Card>
