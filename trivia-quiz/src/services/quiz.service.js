@@ -9,3 +9,17 @@ export const fetchCategories = async () => {
     console.error('err: '+error);
   }
 };
+
+export const fetchQuestions = async (amount, category, difficulty) => {
+  const url = `https://opentdb.com/api.php?
+  amount=${amount}&category=${category}&difficulty=${difficulty}&type=multiple`;
+
+  try {
+    const response = await fetch(url);
+
+    return response.json();
+  } catch (error) {
+    console.error('Error fetching questions:', error);
+    throw error;
+  }
+};

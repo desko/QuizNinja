@@ -5,25 +5,25 @@ import {
   SliderThumb,
   SliderMark,
 } from '@chakra-ui/react';
-import {DIFFICULTY} from '../../common/constants.js';
+import {DIFFICULTY, SLIDER_DIFFICULTY} from '../../common/constants.js';
 
 const SliderDifficulty = () => {
   return (
     <Slider aria-label='slider-ex-1'
-      defaultValue={0}
-      min={0}
-      max={2}
+      defaultValue={DIFFICULTY.EASY.VALUE}
+      min={DIFFICULTY.EASY.VALUE}
+      max={DIFFICULTY.HARD.VALUE}
       mb='6rem'
       mt='1rem'
-      onChange={(e) => console.log(e)}>
+      onChange={(e) => console.log(SLIDER_DIFFICULTY[e])}>
       <SliderMark pt='1rem' transform='translateX(-50%)' value={0}>
-        {DIFFICULTY.EASY}
+        {DIFFICULTY.EASY.NAME}
       </SliderMark>
       <SliderMark pt='1rem' transform='translateX(-50%)' value={1}>
-        {DIFFICULTY.MEDIUM}
+        {DIFFICULTY.MEDIUM.NAME}
       </SliderMark>
       <SliderMark pt='1rem' transform='translateX(-50%)' value={2}>
-        {DIFFICULTY.HARD}
+        {DIFFICULTY.HARD.NAME}
       </SliderMark>
       <SliderTrack h='0.8rem' >
         <SliderFilledTrack bgGradient={[
