@@ -5,9 +5,9 @@ const Container = ( {children} ) => {
     <Center>
       <Box maxWidth={{'sm': '100%',
         'md': '100%',
-        'lg': '100%',
-        'xl': '100rem',
-        '2xl': '120rem'}} paddingX='2rem'>
+        'lg': '100rem',
+        'xl': '120rem',
+        '2xl': '140rem'}} paddingX='2rem'>
         {children}
       </Box>
     </Center>
