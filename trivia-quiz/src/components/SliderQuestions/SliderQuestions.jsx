@@ -9,17 +9,19 @@ import {useState} from 'react';
 import {MIN_NUMBER_OF_QUESTIONS} from '../../common/constants.js';
 
 
-const SliderQuestions = ({maxQuestions = 20}) => {
+const SliderQuestions = ({maxQuestions = 20, changeHandler}) => {
   const [questions, setQuestions] = useState(MIN_NUMBER_OF_QUESTIONS);
 
   return (
     <Slider aria-label='slider-ex-1'
       mb='6rem'
       mt='1rem'
-      defaultValue={5}
-      min={5}
+      defaultValue={MIN_NUMBER_OF_QUESTIONS}
+      min={MIN_NUMBER_OF_QUESTIONS}
       max={maxQuestions}
-      onChange={(e) => setQuestions(e)}>
+      onChange={(e) => {
+        setQuestions(e), changeHandler(e);
+      }}>
       <SliderMark
         value={questions}
         textAlign='center'
