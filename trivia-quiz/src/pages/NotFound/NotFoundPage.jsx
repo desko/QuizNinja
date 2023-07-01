@@ -16,7 +16,7 @@ const NotFoundPage = () => {
         <Image
           src={NotFound}
           alt='QuizNinja Logo'
-          width={{'base': '25.6rem', 'lg': '51.2rem'}}
+          width={{'base': '25.6rem', 'lg': '38.4rem'}}
           height='auto'
           m
           transform='scaleX(-1)' />
