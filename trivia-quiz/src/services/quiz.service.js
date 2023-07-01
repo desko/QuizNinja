@@ -41,6 +41,7 @@ export const fetchQuestionCountByCategoryAndType = async (category, difficulty) 
 };
 
 export const fetchQuestions = async (amount, category, difficulty) => {
+  console.log(amount, category, difficulty);
   const url = `https://opentdb.com/api.php?
   amount=${amount}&category=${category}&difficulty=${difficulty}&type=multiple`;
 
