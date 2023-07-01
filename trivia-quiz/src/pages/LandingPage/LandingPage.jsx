@@ -6,10 +6,10 @@ const LandingPage = () => {
     <>
       <Text
         p='1rem 0 4rem'
-        maxW='80%'
+        maxW={{'base': '90%', 'md': '80%'}}
         m='0 auto'
         textAlign='center'
-        fontSize='3xl'
+        fontSize={{'base': '2xl', 'md': '3xl', '2xl': '4xl'}}
         fontWeight='bold'
         color='orange.600'>
         <strong>
