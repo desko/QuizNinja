@@ -5,10 +5,14 @@ import Timer from '../../components/Timer/Timer';
 import {Flex} from '@chakra-ui/react';
 import { useContext } from 'react';
 import { QuizContext } from '../../context/QuizContext';
+import { useTitle } from '../../hooks/useTitle';
 
 const QuizPage = () => {
   const {quizData} = useContext(QuizContext);
   const quizTime = quizData.length * 60;
+
+  useTitle(`QuizNinja - Slashing through question`);
+
   return (
     <>
       <Flex flexWrap='wrap' gap='2rem'>

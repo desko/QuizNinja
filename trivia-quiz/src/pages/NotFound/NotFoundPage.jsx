@@ -5,9 +5,12 @@ import {LANDING_PAGE} from '../../common/routes';
 import Container from '../../components/Container/Container';
 import NotFound from '../../assets/img/NotFound.min.png';
 import {Image} from '@chakra-ui/react';
+import {useTitle} from '../../hooks/useTitle';
 
 const NotFoundPage = () => {
   const navigate = useNavigate();
+
+  useTitle('QuizNinja - Not Found');
 
   return (
     <Container>
