@@ -3,7 +3,7 @@ import {useContext, useEffect} from 'react';
 import {QuizContext} from '../../context/QuizContext';
 import {useState} from 'react';
 
-const Progressbar = ({val = 0}) => {
+const Progressbar = ({customStyle = {}}) => {
   const {quizData} = useContext(QuizContext);
 
   const [progress, setProgress] = useState(0);
@@ -14,7 +14,7 @@ const Progressbar = ({val = 0}) => {
   }, [quizData]);
 
   return (
-    <Box>
+    <Box style={customStyle}>
       <Text>Progress: {Math.round(progress)}%</Text>
       <Progress hasStripe value={progress} size='xl' colorScheme='orange' height='2rem' />
     </Box>
