@@ -5,6 +5,7 @@ import {
   Card,
   CardHeader,
   Heading,
+  Spinner,
 } from '@chakra-ui/react';
 import SliderDifficulty
   from '../SliderDifficulty/SliderDifficulty';
@@ -65,7 +66,7 @@ const FormQuiz = () => {
     refetchSliderCount();
   }, [difficulty, category, questionsAmount, refetchSliderCount]);
 
-  if (isLoadingCategs) return <p>Loading...</p>;
+  if (isLoadingCategs) return <Spinner color='orange.400' size='xl' display='block' mx='auto' />;
 
   return (
     <Card

@@ -16,7 +16,7 @@ const Timer = ({time, onFinishTime}) => {
       m='3rem auto'>
       <span>
         {
-          (timeObject.hours > 9 ? timeObject.hours : `0${timeObject.hours}` + ' : ') +
+          (timeObject.hours > 9 ? timeObject.hours : `0${timeObject.hours}`) + ' : ' +
           (timeObject.minutes > 9 ? timeObject.minutes : `0${timeObject.minutes}`) + ' : ' +
           (timeObject.seconds > 9 ? timeObject.seconds : `0${timeObject.seconds}`)
         }
