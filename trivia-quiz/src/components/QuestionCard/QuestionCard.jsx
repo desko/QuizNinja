@@ -54,8 +54,6 @@ const QuestionCard = () => {
     navigate(`/quiz/questions/${nextQuestionId}`);
   };
 
-  console.log(typeof questionNumber);
-
   return (
     <Card
       border={'.3rem solid'}
