@@ -1,13 +1,9 @@
-import {useContext} from 'react';
-import {QuizContext} from '../../context/QuizContext';
+import QuestionCard from '../../components/QuestionCard/QuestionCard';
 
 
 const QuizPage = () => {
-  const {quizData} = useContext(QuizContext);
-
-  console.log(quizData);
   return (
-    <div>QuizPage</div>
+    <QuestionCard />
   );
 };
 

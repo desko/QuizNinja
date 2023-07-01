@@ -1,6 +1,6 @@
 import {Button} from '@chakra-ui/react';
 
-const Btn = ( {clickHandler = () => {}, text, disabled, type='submit'} ) => {
+const Btn = ( {clickHandler = () => {}, text, disabled, type='submit', customStyle} ) => {
   return (
     <Button
       alignSelf='center'
@@ -13,7 +13,8 @@ const Btn = ( {clickHandler = () => {}, text, disabled, type='submit'} ) => {
       colorScheme='orange'
       onClick={clickHandler}
       isDisabled={disabled}
-      type={type}>
+      type={type}
+      style={customStyle}>
       {text}
     </Button>
   );
