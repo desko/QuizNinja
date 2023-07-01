@@ -1,19 +1,19 @@
 import {Box} from '@chakra-ui/react';
 import {useTimer} from '../../hooks/useTimer';
 
-const Timer = ({time, onFinishTime}) => {
+const Timer = ({time, onFinishTime, customStyle = {}}) => {
   const timeObject = useTimer(time, onFinishTime);
 
   return (
     <Box
-      maxW='max-content'
       p='1rem 2rem'
       fontWeight='700'
+      textAlign='center'
       borderRadius='.5rem'
       border={'.3rem solid'}
       borderColor='orange.400'
       color='orange.400'
-      m='3rem auto'>
+      style={customStyle}>
       <span>
         {
           (timeObject.hours > 9 ? timeObject.hours : `0${timeObject.hours}`) + ' : ' +

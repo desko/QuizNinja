@@ -4,7 +4,7 @@ import Btn from '../Btn/Btn';
 import {useQuestions} from '../../hooks/useQuestions';
 
 
-const QuestionCard = () => {
+const QuestionCard = ({customStyle = {}}) => {
   const {
     quizData,
     questionNumber,
@@ -31,7 +31,8 @@ const QuestionCard = () => {
       borderRadius='2rem'
       boxShadow=''
       p='4rem 12.5%'
-      mt='2rem'>
+      mt='2rem'
+      style={customStyle}>
       <CardHeader p='0 0 3rem'>
         <Heading
           as='h2'
