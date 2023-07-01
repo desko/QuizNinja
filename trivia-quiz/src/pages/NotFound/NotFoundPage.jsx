@@ -11,15 +11,16 @@ const NotFoundPage = () => {
 
   return (
     <Container>
-      <Flex py='2rem' flexDir='column' alignItems='center'>
+      <Flex paddingBlock='2rem 5rem' flexDir='column' alignItems='center'>
+        <Heading as='h1' py='2rem' color='orange.700' textAlign='center' >Nothing to be found!</Heading>
         <Image
           src={NotFound}
           alt='QuizNinja Logo'
-          width='51.2rem'
+          width={{'base': '25.6rem', 'lg': '51.2rem'}}
           height='auto'
+          m
           transform='scaleX(-1)' />
-        <Heading as='h1' py='2rem' color='orange.700' textAlign='center' >Nothing to be found!</Heading>
-        <Btn text='Back to Home' clickHandler={() => {
+        <Btn text='Back to Home' customStyle={{marginTop: '2rem'}} clickHandler={() => {
           navigate(LANDING_PAGE);
         }} />
       </Flex>
