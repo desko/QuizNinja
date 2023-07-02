@@ -1,7 +1,10 @@
 import FormQuiz from '../../components/FromQuiz/FormQuiz';
 import {Text} from '@chakra-ui/react';
+import {useTitle} from '../../hooks/useTitle';
 
 const LandingPage = () => {
+  useTitle('QuizNinja - Unleash your inner QuizNinja');
+
   return (
     <>
       <Text

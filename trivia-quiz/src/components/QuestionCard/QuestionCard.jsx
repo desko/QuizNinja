@@ -1,18 +1,17 @@
 import {Box, Card, CardHeader, Heading, Radio, RadioGroup} from '@chakra-ui/react';
 import {useNavigate} from 'react-router-dom';
 import Btn from '../Btn/Btn';
-import {useQuestions} from '../../hooks/useQuestions';
+import {decode} from 'html-entities';
 
-
-const QuestionCard = ({customStyle = {}}) => {
-  const {
-    quizData,
-    questionNumber,
-    currentQuestion,
-    handleAnswerSelect,
-  } = useQuestions();
+const QuestionCard = ({
+  customStyle = {},
+  quizData,
+  questionNumber,
+  currentQuestion,
+  handleAnswerSelect,
+  submitHandler,
+}) => {
   const navigate = useNavigate();
-
 
   const handlePreviousQuestion = () => {
     const previousQuestion = Number(questionNumber) - 1;
@@ -47,14 +46,14 @@ const QuestionCard = ({customStyle = {}}) => {
           color='orange.600'
           fontWeight='500'
           textAlign='center'>
-          {currentQuestion.question}
+          {decode(currentQuestion.question)}
         </Heading >
       </CardHeader>
 
       <RadioGroup onChange={handleAnswerSelect} value={currentQuestion.selectedAnswer}>
         {currentQuestion?.answers?.map((answer) => (
           <Radio key={answer} value={answer} size='lg' display='block' colorScheme='orange' defaultChecked>
-            {answer}
+            {decode(answer)}
           </Radio>
         ))}
       </RadioGroup>
@@ -66,7 +65,7 @@ const QuestionCard = ({customStyle = {}}) => {
         <Btn text='>' customStyle={{'marginLeft': 'auto'}} clickHandler={handleNextQuestion} />
         }
         {(Number(questionNumber) === quizData.length) &&
-        <Btn text='Submit' />
+          <Btn text='Submit' clickHandler={submitHandler} />
         }
       </Box>
 
