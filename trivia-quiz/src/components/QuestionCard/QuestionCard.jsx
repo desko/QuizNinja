@@ -1,8 +1,8 @@
 import {Box, Card, CardHeader, Heading, Radio, RadioGroup} from '@chakra-ui/react';
-import {useNavigate} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import Btn from '../Btn/Btn';
 import {useQuestions} from '../../hooks/useQuestions';
-
+import {RESULTS_PAGE} from '../../common/routes';
 
 const QuestionCard = ({customStyle = {}}) => {
   const {
@@ -66,7 +66,9 @@ const QuestionCard = ({customStyle = {}}) => {
         <Btn text='>' customStyle={{'marginLeft': 'auto'}} clickHandler={handleNextQuestion} />
         }
         {(Number(questionNumber) === quizData.length) &&
-        <Btn text='Submit' />
+        <Link to={RESULTS_PAGE}>
+          <Btn text='Submit' />
+        </Link>
         }
       </Box>
 
