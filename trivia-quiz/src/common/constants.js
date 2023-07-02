@@ -19,3 +19,4 @@ export const SLIDER_DIFFICULTY = {
 };
 
 export const MIN_NUMBER_OF_QUESTIONS = 5;
+export const SECONDS_PER_QUESTION = 60;

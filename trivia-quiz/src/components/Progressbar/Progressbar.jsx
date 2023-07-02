@@ -1,11 +1,8 @@
 import {Box, Progress, Text} from '@chakra-ui/react';
-import {useContext, useEffect} from 'react';
-import {QuizContext} from '../../context/QuizContext';
+import {useEffect} from 'react';
 import {useState} from 'react';
 
-const Progressbar = ({customStyle = {}}) => {
-  const {quizData} = useContext(QuizContext);
-
+const Progressbar = ({customStyle = {}, quizData}) => {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
