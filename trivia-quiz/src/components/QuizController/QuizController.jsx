@@ -4,6 +4,9 @@ import QuizNavigation from '../QuizNavigation/QuizNavigation';
 import Timer from '../../components/Timer/Timer';
 import {Flex} from '@chakra-ui/react';
 import {useQuestions} from '../../hooks/useQuestions';
+import {RESULTS_PAGE} from '../../common/routes';
+import {SECONDS_PER_QUESTION} from '../../common/constants';
+import {useNavigate} from 'react-router-dom';
 
 const QuizController = () => {
   const {
@@ -12,21 +15,17 @@ const QuizController = () => {
     currentQuestion,
     handleAnswerSelect,
   } = useQuestions();
-
-  const quizTime = quizData.length * 60;
-
-  const onTimeEnded = () => {
-    console.log('time');
-  };
+  const navigate = useNavigate();
+  const quizTime = quizData.length * SECONDS_PER_QUESTION;
 
   const submitHandler = () => {
-
+    navigate(RESULTS_PAGE);
   };
 
   return (
     <Flex flexWrap='wrap' gap='2rem'>
       <Timer time={quizTime}
-        onFinishTime={onTimeEnded}
+        onFinishTime={submitHandler}
         customStyle={{'flex': '0 0 100%'}} />
       <QuestionCard
         customStyle={{'flex': '0 0 calc(100% - 25rem - 2rem)'}}

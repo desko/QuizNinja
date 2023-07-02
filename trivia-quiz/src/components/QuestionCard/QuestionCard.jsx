@@ -65,7 +65,7 @@ const QuestionCard = ({
         <Btn text='>' customStyle={{'marginLeft': 'auto'}} clickHandler={handleNextQuestion} />
         }
         {(Number(questionNumber) === quizData.length) &&
-        <Btn text='Submit' />
+          <Btn text='Submit' clickHandler={submitHandler} />
         }
       </Box>
 
