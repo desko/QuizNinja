@@ -6,7 +6,7 @@ const Progressbar = ({customStyle = {}, quizData}) => {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    setProgress((quizData.filter((question) => question.selectedAnswer !== undefined ? question : null).length /
+    setProgress((quizData.filter((question) => question.selectedAnswer !== '' ? question : null).length /
     quizData.length) * 100);
   }, [quizData]);
 

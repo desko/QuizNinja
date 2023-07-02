@@ -1,7 +1,8 @@
 import {useContext} from 'react';
 import {QuizContext} from '../../context/QuizContext';
-import {Card, CardHeader, Heading} from '@chakra-ui/react';
-
+import {Heading, Card, CardHeader} from '@chakra-ui/react';
+import AccordionSingle from '../../components/AccordionSingle/AccordionSingle';
+import QuestionReview from '../../components/QuestionReview/QuestionReview';
 
 const ResultsPage = () => {
   const {quizData} = useContext(QuizContext);
@@ -44,6 +45,7 @@ const ResultsPage = () => {
             textAlign='center'>
             You earned:
           </Heading >
+          <AccordionSingle title='Check Results' items={quizData} RenderItem={QuestionReview} />
         </CardHeader>
       </Card>
     </>

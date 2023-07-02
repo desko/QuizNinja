@@ -1,3 +1,6 @@
+
+import {shuffleAnswers} from '../common/helpers';
+
 export const fetchCategories = async () => {
   const url = `https://opentdb.com/api_category.php`;
   try {
@@ -47,8 +50,17 @@ export const fetchQuestions = async (amount, category, difficulty) => {
 
   try {
     const response = await fetch(url);
+    const data = await response.json();
+    const transformedData = data?.results?.map((question) => {
+      question.answers = shuffleAnswers([
+        ...question.incorrect_answers,
+        question.correct_answer,
+      ]);
+      question.selectedAnswer = '';
+      return question;
+    });
 
-    return response.json();
+    return transformedData;
   } catch (error) {
     console.error('Error fetching questions:', error);
     throw error;
