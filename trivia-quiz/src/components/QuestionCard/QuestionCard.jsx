@@ -52,8 +52,27 @@ const QuestionCard = ({
 
       <RadioGroup onChange={handleAnswerSelect} value={currentQuestion.selectedAnswer}>
         {currentQuestion?.answers?.map((answer) => (
-          <Radio key={answer} value={answer} size='lg' display='block' colorScheme='orange' defaultChecked>
-            {decode(answer)}
+
+          <Radio key={answer}
+            value={answer}
+            size='lg'
+            width='100%'
+            display='flex'
+            colorScheme='orange'
+            color='silver'
+            defaultChecked>
+            <Box
+              as='p'
+              cursor='pointer'
+              borderWidth='1px'
+              borderRadius='md'
+              p='.3rem'
+              boxShadow='md'
+              bg={answer === currentQuestion.selectedAnswer ? 'orange.400' : 'gray.50'}
+              color={answer === currentQuestion.selectedAnswer ? 'white' : 'orange.700'}
+              borderColor={answer === currentQuestion.selectedAnswer ? 'orange.700' : 'gray.50'}>
+              {decode(answer)}
+            </Box>
           </Radio>
         ))}
       </RadioGroup>
