@@ -1,13 +1,7 @@
 import {Card, Grid, GridItem} from '@chakra-ui/react';
-import {useContext} from 'react';
-import {QuizContext} from '../../context/QuizContext';
 import {NavLink} from 'react-router-dom';
 
-const Navigation = ({customStyle = {}}) => {
-  const {quizData} = useContext(QuizContext);
-  console.log(quizData);
-
-
+const QuizNavigation = ({customStyle = {}, quizData}) => {
   return (
     <Card
       border={'.3rem solid'}
@@ -30,7 +24,6 @@ const Navigation = ({customStyle = {}}) => {
               color: 'var(--chakra-colors-white)',
             };
           }
-          console.log(index);
           return (
             <GridItem key={index}
             >
@@ -57,4 +50,4 @@ const Navigation = ({customStyle = {}}) => {
   );
 };
 
-export default Navigation;
+export default QuizNavigation;
