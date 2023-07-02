@@ -57,7 +57,7 @@ const FormQuiz = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
     const data = await fetchQuestions(questionsAmount, category, difficulty);
-    setQuizData(data.results);
+    setQuizData(data);
     navigate(QUIZ_FIRST_QUESTION_PAGE);
   };
 
