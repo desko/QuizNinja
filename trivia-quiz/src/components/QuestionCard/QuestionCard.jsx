@@ -1,4 +1,4 @@
-import {Box, Card, CardHeader, Heading, Radio, RadioGroup} from '@chakra-ui/react';
+import {Box, Card, CardHeader, Heading, Radio, RadioGroup, Grid, GridItem} from '@chakra-ui/react';
 import {useNavigate} from 'react-router-dom';
 import Btn from '../Btn/Btn';
 import {decode} from 'html-entities';
@@ -29,7 +29,7 @@ const QuestionCard = ({
       borderColor='orange.400'
       borderRadius='2rem'
       boxShadow=''
-      p='4rem 12.5%'
+      p='4rem 5rem'
       mt='2rem'
       style={customStyle}>
       <CardHeader p='0 0 3rem'>
@@ -45,38 +45,32 @@ const QuestionCard = ({
           as='h5'
           color='orange.600'
           fontWeight='500'
-          textAlign='center'>
+          textAlign='left'>
           {decode(currentQuestion.question)}
         </Heading >
       </CardHeader>
 
       <RadioGroup onChange={handleAnswerSelect} value={currentQuestion.selectedAnswer}>
-        {currentQuestion?.answers?.map((answer) => (
+        <Grid templateColumns='1fr' gap='1rem'>
+          {currentQuestion?.answers?.map((answer) => (
 
-          <Radio key={answer}
-            value={answer}
-            size='lg'
-            width='100%'
-            display='flex'
-            colorScheme='orange'
-            color='silver'
-            defaultChecked>
-            <Box
-              as='p'
-              cursor='pointer'
-              borderWidth='1px'
-              borderRadius='md'
-              p='.3rem'
-              boxShadow='md'
-              bg={answer === currentQuestion.selectedAnswer ? 'orange.400' : 'gray.50'}
-              color={answer === currentQuestion.selectedAnswer ? 'white' : 'orange.700'}
-              borderColor={answer === currentQuestion.selectedAnswer ? 'orange.700' : 'gray.50'}>
-              {decode(answer)}
-            </Box>
-          </Radio>
-        ))}
+            <GridItem key={answer}>
+              <Radio
+                value={answer}
+                size='lg'
+                width='100%'
+                display='flex'
+                colorScheme='orange'
+                color='silver'
+                defaultChecked
+                variant='button'>
+                {decode(answer)}
+              </Radio>
+            </GridItem>
+          ))}
+        </Grid>
       </RadioGroup>
-      <Box display='flex' alignItems='center' justifyContent='space-between'>
+      <Box pt='2rem' display='flex' alignItems='center' justifyContent='space-between'>
         {Number(questionNumber) !== 1 &&
           <Btn text='<' clickHandler={handlePreviousQuestion} />
         }

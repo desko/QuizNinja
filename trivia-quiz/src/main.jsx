@@ -7,13 +7,13 @@ import './styles/reset.css';
 import './styles/base.css';
 import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
 import {QuizProvider} from './context/QuizContext.jsx';
-
+import theme from './styles/chakra/Theme';
 
 const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <React.StrictMode>
-      <ChakraProvider>
+      <ChakraProvider theme={theme}>
         <BrowserRouter>
           <QueryClientProvider client={queryClient}>
             <QuizProvider>
