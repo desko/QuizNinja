@@ -7,6 +7,9 @@ import LandingPage from './pages/LandingPage/LandingPage';
 import QuizPage from './pages/QuizPage/QuizPage';
 import NotFoundPage from './pages/NotFound/NotFoundPage';
 import ResultsPage from './pages/ResultsPage/ResultsPage';
+import Submitted from './hoc/Submitted';
+import NotSubmitted from './hoc/NotSubmitted';
+
 
 function App() {
   return (
@@ -15,9 +18,14 @@ function App() {
         <Logo />
         <Routes>
           <Route path={LANDING_PAGE} element={<LandingPage />} />
-          <Route path={QUIZ_PAGE} element={<QuizPage />} />
+          <Route path={QUIZ_PAGE} element={<NotSubmitted>
+            <QuizPage />
+          </NotSubmitted>} />
           <Route path={NOT_FOUND} element={<NotFoundPage />} />
-          <Route path={RESULTS_PAGE} element={<ResultsPage />} />
+          <Route path={RESULTS_PAGE}
+            element={<Submitted>
+              <ResultsPage />
+            </Submitted>} />
         </Routes>
       </Container>
     </div>
