@@ -3,6 +3,7 @@ import {Select as SelectChakra} from '@chakra-ui/react';
 const Select = ( {changeHandler, options} ) => {
   return (
     <SelectChakra
+      variant='custom'
       mb='4rem'
       placeholder='Select option'
       onChange={ changeHandler}>
