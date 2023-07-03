@@ -1,9 +1,16 @@
 import FormQuiz from '../../components/FromQuiz/FormQuiz';
 import {Text} from '@chakra-ui/react';
 import {useTitle} from '../../hooks/useTitle';
+import {useContext, useEffect} from 'react';
+import {QuizContext} from '../../context/QuizContext';
 
 const LandingPage = () => {
+  const {setIsSubmitted} = useContext(QuizContext);
   useTitle('QuizNinja - Unleash your inner QuizNinja');
+
+  useEffect(() => {
+    setIsSubmitted(false);
+  }, [setIsSubmitted]);
 
   return (
     <>

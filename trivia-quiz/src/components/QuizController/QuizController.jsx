@@ -7,6 +7,8 @@ import {useQuestions} from '../../hooks/useQuestions';
 import {RESULTS_PAGE} from '../../common/routes';
 import {SECONDS_PER_QUESTION} from '../../common/constants';
 import {useNavigate} from 'react-router-dom';
+import {useContext} from 'react';
+import {QuizContext} from '../../context/QuizContext';
 
 const QuizController = () => {
   const {
@@ -15,10 +17,12 @@ const QuizController = () => {
     currentQuestion,
     handleAnswerSelect,
   } = useQuestions();
+  const {setIsSubmitted} = useContext(QuizContext);
   const navigate = useNavigate();
   const quizTime = quizData.length * SECONDS_PER_QUESTION;
 
   const submitHandler = () => {
+    setIsSubmitted(true);
     navigate(RESULTS_PAGE);
   };
 

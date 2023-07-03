@@ -7,8 +7,12 @@ import {LANDING_PAGE} from '../../common/routes';
 
 
 const QuizPage = () => {
-  const {quizData} = useContext(QuizContext);
+  const {quizData, setIsSubmitted} = useContext(QuizContext);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    setIsSubmitted(false);
+  }, [setIsSubmitted]);
 
   useTitle(`QuizNinja - Slashing through question`);
   useEffect(() => {
