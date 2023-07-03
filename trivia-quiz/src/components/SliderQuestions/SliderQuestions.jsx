@@ -9,7 +9,7 @@ import {useState} from 'react';
 import {MIN_NUMBER_OF_QUESTIONS} from '../../common/constants.js';
 
 
-const SliderQuestions = ({maxQuestions = 20, changeHandler}) => {
+const SliderQuestions = ({ maxQuestions = 20, changeHandler}) => {
   const [questions, setQuestions] = useState(MIN_NUMBER_OF_QUESTIONS);
 
   return (

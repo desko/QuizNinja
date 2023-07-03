@@ -5,6 +5,7 @@ import {
   Card,
   CardHeader,
   Heading,
+  Text,
   Spinner,
 } from '@chakra-ui/react';
 import SliderDifficulty
@@ -20,12 +21,12 @@ import {useNavigate} from 'react-router-dom';
 import {QUIZ_FIRST_QUESTION_PAGE} from '../../common/routes';
 import {QuizContext} from '../../context/QuizContext';
 
-
 const FormQuiz = () => {
+  const navigate = useNavigate();
   const [difficulty, setDifficulty] = useState(DIFFICULTY.EASY.NAME);
   const [category, setCategory] = useState(null);
+  const [isLoadingCount, setIsLoadingCount] = useState(true);
   const [questionsAmount, setQuestionsAmount] = useState(MIN_NUMBER_OF_QUESTIONS);
-  const navigate = useNavigate();
   const {isLoading: isLoadingCategs, error: errorCategories, data: quizCategories} = useQuery({
     queryKey: ['quizCategories'],
     queryFn: fetchCategories,
@@ -33,13 +34,15 @@ const FormQuiz = () => {
 
   const {setQuizData} = useContext(QuizContext);
 
-  const {isLoading: isLoadingQuestions,
+  const {
+    isLoading: isLoadingQuestions,
     error: errorQuestions,
     data: quizQuestions,
-    refetch: refetchSliderCount} = useQuery({
+    refetch: refetchSliderCount,
+  } = useQuery({
     queryKey: ['quizQuestions'],
     queryFn: () => category && fetchQuestionCountByCategoryAndType(category, difficulty),
-    enabled: true,
+    enabled: false,
   });
 
   const difficultyChangeHandler = (e) => {
@@ -61,10 +64,14 @@ const FormQuiz = () => {
     navigate(QUIZ_FIRST_QUESTION_PAGE);
   };
 
+  useEffect(() => {
+    setIsLoadingCount(false);
+  }, [quizQuestions, setIsLoadingCount]);
 
   useEffect(() => {
     refetchSliderCount();
-  }, [difficulty, category, questionsAmount, refetchSliderCount]);
+    setIsLoadingCount(true);
+  }, [difficulty, category, refetchSliderCount]);
 
   if (isLoadingCategs) return <Spinner color='orange.400' size='xl' display='block' mx='auto' />;
 
@@ -95,16 +102,18 @@ const FormQuiz = () => {
           <SliderDifficulty changeHandler={difficultyChangeHandler} />
           <FormErrorMessage></FormErrorMessage>
 
-          {quizQuestions && (
+          {(!isLoadingCount && quizQuestions) && (
             <>
               <FormLabel>Question Count:</FormLabel>
-              <SliderQuestions maxQuestions={quizQuestions} changeHandler={questionsAmountChangeHandler} />
+              <SliderQuestions
+                maxQuestions={quizQuestions}
+                changeHandler={questionsAmountChangeHandler} />
             </>
-          ) }
+          )}
           <FormErrorMessage></FormErrorMessage>
 
           <Btn
-            disabled={quizQuestions ? false : true}
+            disabled={(quizQuestions && !isLoadingCount) ? false : true}
             alignSelf='center'
             text={'start quiz'} />
         </FormControl>
