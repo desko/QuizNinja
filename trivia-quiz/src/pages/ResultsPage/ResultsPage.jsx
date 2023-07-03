@@ -3,6 +3,7 @@ import {QuizContext} from '../../context/QuizContext';
 import {Heading, Card, CardHeader} from '@chakra-ui/react';
 import AccordionSingle from '../../components/AccordionSingle/AccordionSingle';
 import QuestionReview from '../../components/QuestionReview/QuestionReview';
+import {useTitle} from '../../hooks/useTitle';
 
 const ResultsPage = () => {
   const {quizData} = useContext(QuizContext);
@@ -11,6 +12,8 @@ const ResultsPage = () => {
   });
   const correctAnswersScore = `${correctAnswers.length}/${quizData.length}`;
   const percentageScore = (correctAnswers.length / quizData.length) * 100;
+
+  useTitle(`QuizNinja - Your Results`);
 
   return (
     <>
