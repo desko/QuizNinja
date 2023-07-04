@@ -1,9 +1,13 @@
 import {Card, Grid, GridItem} from '@chakra-ui/react';
 import {NavLink} from 'react-router-dom';
+import ConfirmationModal from '../ConfiramtionModal/ConfirmationModal';
 
-const QuizNavigation = ({customStyle = {}, quizData}) => {
+const QuizNavigation = ({customStyle = {}, quizData, submitHandler}) => {
   return (
     <Card
+      flexDirection='column'
+      justifyContent='space-between'
+      gap='2rem'
       border={'.3rem solid'}
       borderColor='orange.400'
       borderRadius='2rem'
@@ -45,7 +49,7 @@ const QuizNavigation = ({customStyle = {}, quizData}) => {
           );
         })}
       </Grid>
-
+      <ConfirmationModal submitHandler={submitHandler} />
     </Card>
   );
 };

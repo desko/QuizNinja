@@ -39,7 +39,7 @@ const QuizController = () => {
         handleAnswerSelect={handleAnswerSelect}
         submitHandler={submitHandler}/>
       <QuizNavigation customStyle={{'flex': '0 0 25rem'}} quizData={quizData} />
-      <Progressbar customStyle={{'flex': '0 0 100%'}} quizData={quizData} />
+      <Progressbar customStyle={{'flex': '0 0 100%'}} quizData={quizData} submitHandler={submitHandler} />
     </Flex>
   );
 };
