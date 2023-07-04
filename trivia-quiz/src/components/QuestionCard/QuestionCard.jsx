@@ -2,6 +2,7 @@ import {Box, Card, CardHeader, Heading, Radio, RadioGroup, Grid, GridItem} from 
 import {useNavigate} from 'react-router-dom';
 import Btn from '../Btn/Btn';
 import {decode} from 'html-entities';
+import ConfirmationModal from '../ConfiramtionModal/ConfirmationModal';
 
 const QuestionCard = ({
   customStyle = {},
@@ -22,6 +23,7 @@ const QuestionCard = ({
     const nextQuestionId = Number(questionNumber) + 1;
     navigate(`/quiz/questions/${nextQuestionId}`);
   };
+
 
   return (
     <Card
@@ -78,7 +80,7 @@ const QuestionCard = ({
         <Btn text='>' customStyle={{'marginLeft': 'auto'}} clickHandler={handleNextQuestion} />
         }
         {(Number(questionNumber) === quizData.length) &&
-          <Btn text='Submit' clickHandler={submitHandler} />
+          <ConfirmationModal submitHandler={submitHandler} />
         }
       </Box>
 
