@@ -14,7 +14,10 @@ const Btn = ( {clickHandler = () => {}, text, disabled, type='submit', customSty
       onClick={clickHandler}
       isDisabled={disabled}
       type={type}
-      style={customStyle}>
+      style={customStyle}
+      _hover={{
+        bgColor: 'orange.600',
+      }}>
       {text}
     </Button>
   );
