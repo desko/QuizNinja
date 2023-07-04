@@ -15,7 +15,7 @@ import Btn from '../Btn/Btn';
 import {useQuery} from '@tanstack/react-query';
 import {fetchCategories, fetchQuestionCountByCategoryAndType, fetchQuestions} from '../../services/quiz.service';
 import {useContext, useEffect, useState} from 'react';
-import {SLIDER_DIFFICULTY, DIFFICULTY, MIN_NUMBER_OF_QUESTIONS} from '../../common/constants';
+import {SLIDER_DIFFICULTY, DIFFICULTY, MIN_NUMBER_OF_QUESTIONS, SECONDS_PER_QUESTION} from '../../common/constants';
 import {useNavigate} from 'react-router-dom';
 import {QUIZ_FIRST_QUESTION_PAGE} from '../../common/routes';
 import {QuizContext} from '../../context/QuizContext';
@@ -33,7 +33,7 @@ const FormQuiz = () => {
     queryFn: fetchCategories,
   });
 
-  const {setQuizData} = useContext(QuizContext);
+  const {setQuizData, setQuizTime} = useContext(QuizContext);
 
   const {
     isLoading: isLoadingQuestions,
@@ -62,6 +62,7 @@ const FormQuiz = () => {
     e.preventDefault();
     const data = await fetchQuestions(questionsAmount, category, difficulty);
     setQuizData(data);
+    setQuizTime(Math.floor((Date.now() + (questionsAmount * SECONDS_PER_QUESTION * 1000)) / 1000));
     navigate(QUIZ_FIRST_QUESTION_PAGE);
   };
 
