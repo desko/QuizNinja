@@ -4,6 +4,8 @@ import {Heading, Card, CardHeader} from '@chakra-ui/react';
 import AccordionSingle from '../../components/AccordionSingle/AccordionSingle';
 import QuestionReview from '../../components/QuestionReview/QuestionReview';
 import {useTitle} from '../../hooks/useTitle';
+import Award from '../../components/Award/Award';
+import {SCORE_MAP} from '../../common/constants';
 
 const ResultsPage = () => {
   const {quizData} = useContext(QuizContext);
@@ -12,6 +14,8 @@ const ResultsPage = () => {
   });
   const correctAnswersScore = `${correctAnswers.length}/${quizData.length}`;
   const percentageScore = (correctAnswers.length / quizData.length) * 100;
+  const percentageThreshhold = Math.floor(percentageScore / 10) * 10;
+  const color = SCORE_MAP.find((score) => score.SCORE_TRESHHOLD === percentageThreshhold).COLOR;
 
   useTitle(`QuizNinja - Your Results`);
 
@@ -48,6 +52,7 @@ const ResultsPage = () => {
             textAlign='center'>
             You earned:
           </Heading >
+          <Award color={color} />
           <AccordionSingle title='Check Results' items={quizData} RenderItem={QuestionReview} />
         </CardHeader>
       </Card>
