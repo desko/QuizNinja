@@ -5,7 +5,6 @@ import {
   Card,
   CardHeader,
   Heading,
-  Text,
   Spinner,
 } from '@chakra-ui/react';
 import SliderDifficulty
@@ -16,10 +15,11 @@ import Btn from '../Btn/Btn';
 import {useQuery} from '@tanstack/react-query';
 import {fetchCategories, fetchQuestionCountByCategoryAndType, fetchQuestions} from '../../services/quiz.service';
 import {useContext, useEffect, useState} from 'react';
-import {SLIDER_DIFFICULTY, DIFFICULTY, MIN_NUMBER_OF_QUESTIONS} from '../../common/constants';
+import {SLIDER_DIFFICULTY, DIFFICULTY, MIN_NUMBER_OF_QUESTIONS, SECONDS_PER_QUESTION} from '../../common/constants';
 import {useNavigate} from 'react-router-dom';
 import {QUIZ_FIRST_QUESTION_PAGE} from '../../common/routes';
 import {QuizContext} from '../../context/QuizContext';
+import ErrorCard from '../ErrorCard/ErrorCard';
 
 const FormQuiz = () => {
   const navigate = useNavigate();
@@ -27,20 +27,21 @@ const FormQuiz = () => {
   const [category, setCategory] = useState(null);
   const [isLoadingCount, setIsLoadingCount] = useState(true);
   const [questionsAmount, setQuestionsAmount] = useState(MIN_NUMBER_OF_QUESTIONS);
+
   const {isLoading: isLoadingCategs, error: errorCategories, data: quizCategories} = useQuery({
     queryKey: ['quizCategories'],
     queryFn: fetchCategories,
   });
 
-  const {setQuizData} = useContext(QuizContext);
+  const {setQuizData, setQuizTime} = useContext(QuizContext);
 
   const {
     isLoading: isLoadingQuestions,
     error: errorQuestions,
-    data: quizQuestions,
+    data: quizQuestionCount,
     refetch: refetchSliderCount,
   } = useQuery({
-    queryKey: ['quizQuestions'],
+    queryKey: ['quizQuestionCount'],
     queryFn: () => category && fetchQuestionCountByCategoryAndType(category, difficulty),
     enabled: false,
   });
@@ -61,12 +62,13 @@ const FormQuiz = () => {
     e.preventDefault();
     const data = await fetchQuestions(questionsAmount, category, difficulty);
     setQuizData(data);
+    setQuizTime(Math.floor((Date.now() + (questionsAmount * SECONDS_PER_QUESTION * 1000)) / 1000));
     navigate(QUIZ_FIRST_QUESTION_PAGE);
   };
 
   useEffect(() => {
     setIsLoadingCount(false);
-  }, [quizQuestions, setIsLoadingCount]);
+  }, [quizQuestionCount, setIsLoadingCount]);
 
   useEffect(() => {
     refetchSliderCount();
@@ -74,6 +76,8 @@ const FormQuiz = () => {
   }, [difficulty, category, refetchSliderCount]);
 
   if (isLoadingCategs) return <Spinner color='orange.400' size='xl' display='block' mx='auto' />;
+
+  if (errorCategories || errorQuestions) return <ErrorCard />;
 
   return (
     <Card
@@ -102,18 +106,18 @@ const FormQuiz = () => {
           <SliderDifficulty changeHandler={difficultyChangeHandler} />
           <FormErrorMessage></FormErrorMessage>
 
-          {(!isLoadingCount && quizQuestions) && (
+          {(!isLoadingCount && quizQuestionCount) && (
             <>
               <FormLabel>Question Count:</FormLabel>
               <SliderQuestions
-                maxQuestions={quizQuestions}
+                maxQuestions={quizQuestionCount}
                 changeHandler={questionsAmountChangeHandler} />
             </>
           )}
           <FormErrorMessage></FormErrorMessage>
 
           <Btn
-            disabled={(quizQuestions && !isLoadingCount) ? false : true}
+            disabled={(quizQuestionCount && !isLoadingCount) ? false : true}
             alignSelf='center'
             text={'start quiz'} />
         </FormControl>

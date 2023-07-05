@@ -9,6 +9,7 @@ export const fetchCategories = async () => {
     return data.trivia_categories;
   } catch (error) {
     console.error('err: '+error);
+    throw error;
   }
 };
 
@@ -50,6 +51,9 @@ export const fetchQuestions = async (amount, category, difficulty) => {
   try {
     const response = await fetch(url);
     const data = await response.json();
+    // if (data.response_code !== 0) {
+    //   return Promise.reject(new Error(data.response_code));
+    // }
     const transformedData = data?.results?.map((question) => {
       question.answers = shuffleAnswers([
         ...question.incorrect_answers,
