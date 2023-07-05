@@ -1,12 +1,28 @@
 import FormQuiz from '../../components/FromQuiz/FormQuiz';
-import {Text} from '@chakra-ui/react';
+import {Box, Text} from '@chakra-ui/react';
 import {useTitle} from '../../hooks/useTitle';
-import {useContext, useEffect} from 'react';
+import {useContext, useEffect, useState} from 'react';
 import {QuizContext} from '../../context/QuizContext';
+import {useNavigate} from 'react-router-dom';
+import Btn from '../../components/Btn/Btn';
 
 const LandingPage = () => {
-  const {setIsSubmitted} = useContext(QuizContext);
+  const {setIsSubmitted, quizTime, quizSubmitted} = useContext(QuizContext);
+  const [activeQuiz, setActiveQuiz] = useState(false);
+  const navigate = useNavigate();
   useTitle('QuizNinja - Unleash your inner QuizNinja');
+
+  useEffect(() => {
+    let time;
+    const interval = setInterval(() => {
+      time = 1000;
+      setActiveQuiz((quizTime - Math.floor(Date.now() / 1000)) > 0);
+    }, time || 0);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [quizTime]);
 
   useEffect(() => {
     setIsSubmitted(false);
@@ -34,6 +50,19 @@ const LandingPage = () => {
             the way. Get started now and let the quiz adventure begin!
         </strong>
       </Text>
+      <Box display='flex' alignItems='center' justifyContent='center' flexDirection='column'>
+        {(activeQuiz && !quizSubmitted) && (
+          <>
+            <Text
+              fontWeight='bold'
+              color='orange.600'
+              p='.5rem'>
+            A true Ninja does not run from his assignment!
+            </Text>
+            <Btn text='Back to Quiz' clickHandler={() => navigate('quiz/questions/1')} />
+          </>
+        )}
+      </Box>
       <FormQuiz />
     </>
   );
