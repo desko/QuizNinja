@@ -1,29 +1,15 @@
 import FormQuiz from '../../components/FromQuiz/FormQuiz';
 import {Box, Text} from '@chakra-ui/react';
 import {useTitle} from '../../hooks/useTitle';
-import {useContext, useEffect, useState} from 'react';
-import {QuizContext} from '../../context/QuizContext';
 import {useNavigate} from 'react-router-dom';
 import Btn from '../../components/Btn/Btn';
+import {useActiveQuizTime} from '../../hooks/useActiveQuizTime';
+import {DOCUMENT_TITLE} from '../../common/constants';
 
 const LandingPage = () => {
-  const {isSubmitted, quizTime} = useContext(QuizContext);
-  const [activeQuizTime, setActiveQuizTime] = useState(false);
+  const {activeQuizTime, isSubmitted} = useActiveQuizTime();
   const navigate = useNavigate();
-  useTitle('QuizNinja - Unleash your inner QuizNinja');
-
-  useEffect(() => {
-    let time;
-    const interval = setInterval(() => {
-      time = 1000;
-      setActiveQuizTime((quizTime - Math.floor(Date.now() / 1000)) > 0);
-    }, time || 0);
-
-    return () => {
-      clearInterval(interval);
-    };
-  }, [quizTime]);
-
+  useTitle(DOCUMENT_TITLE.LANDING_PAGE);
 
   return (
     <>

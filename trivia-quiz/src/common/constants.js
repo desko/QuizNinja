@@ -21,6 +21,21 @@ export const SLIDER_DIFFICULTY = {
 export const MIN_NUMBER_OF_QUESTIONS = 5;
 export const SECONDS_PER_QUESTION = 60;
 
+export const DOCUMENT_TITLE = {
+  LANDING_PAGE: 'QuizNinja - Unleash your inner QuizNinja',
+  QUIZ_PAGE: 'QuizNinja - Slashing through question',
+  RESULTS_PAGE: 'QuizNinja - Your Results',
+  NOT_FOUND_PAGE: 'QuizNinja - Not Found',
+};
+
+export const ERROR = {
+  FETCHING_CATEGORIES: 'Error fetching categories:',
+  FETCHING_QUESTIONS: 'Error fetching questions:',
+  FETCHING_QUESTION_COUNT: 'Error fetching questions:',
+};
+
+export const ALERT_MESSAGE = 'Are you sure you want to leave? All provided data will be lost.';
+
 export const SCORE_MAP = [
   {
     SCORE_TRESHHOLD: 0,

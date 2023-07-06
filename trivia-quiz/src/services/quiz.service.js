@@ -1,4 +1,5 @@
 
+import {ERROR} from '../common/constants';
 import {shuffleAnswers} from '../common/helpers';
 
 export const fetchCategories = async () => {
@@ -8,7 +9,7 @@ export const fetchCategories = async () => {
     const data = await response.json();
     return data.trivia_categories;
   } catch (error) {
-    console.error('err: '+error);
+    console.error(ERROR.FETCHING_CATEGORIES, error);
     throw error;
   }
 };
@@ -25,7 +26,7 @@ export const fetchQuestionCountByCategoryAndType = async (category, difficulty) 
 
       return data.results;
     } catch (error) {
-      console.error('Error fetching questions:', error);
+      console.error(ERROR.FETCHING_QUESTION_COUNT, error);
       throw error;
     }
   };
@@ -39,7 +40,7 @@ export const fetchQuestionCountByCategoryAndType = async (category, difficulty) 
     const filteredQuestions = questions?.filter((question) => question.type === 'multiple');
     return filteredQuestions.length;
   } catch (error) {
-    console.error('Error fetching questions:', error);
+    console.error(ERROR.FETCHING_QUESTION_COUNT, error);
     throw error;
   }
 };
@@ -65,7 +66,7 @@ export const fetchQuestions = async (amount, category, difficulty) => {
 
     return transformedData;
   } catch (error) {
-    console.error('Error fetching questions:', error);
+    console.error(ERROR.FETCHING_QUESTIONS, error);
     throw error;
   }
 };
