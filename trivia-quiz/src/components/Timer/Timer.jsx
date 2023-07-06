@@ -1,8 +1,8 @@
 import {Box} from '@chakra-ui/react';
 import {useTimer} from '../../hooks/useTimer';
 
-const Timer = ({time, onFinishTime, customStyle = {}}) => {
-  const timeObject = useTimer(time, onFinishTime);
+const Timer = ({timeEnd, onFinishTime, customStyle = {}}) => {
+  const timeObject = useTimer(timeEnd, onFinishTime);
 
   return (
     <Box

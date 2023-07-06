@@ -27,7 +27,7 @@ const QuizController = () => {
 
   return (
     <Flex flexWrap='wrap' gap='2rem'>
-      <Timer time={(quizTime - Math.floor(Date.now() / 1000))}
+      <Timer timeEnd={quizTime}
         onFinishTime={submitHandler}
         customStyle={{'flex': '0 0 100%'}} />
       <QuestionCard
