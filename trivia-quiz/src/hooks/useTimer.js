@@ -1,14 +1,14 @@
 import {useEffect, useState} from 'react';
 import {timeConverter} from '../common/helpers';
 
-export const useTimer = (time, onFinishTime) => {
-  const [timeSeconds, setTimeSeconds] = useState(time);
-  const [timeObject, setTimeObject] = useState(timeConverter(time));
+export const useTimer = (timeEnd, onFinishTime) => {
+  const [timeSeconds, setTimeSeconds] = useState(timeEnd - Math.floor(Date.now() / 1000));
+  const [timeObject, setTimeObject] = useState(timeConverter(timeSeconds));
 
   useEffect(() => {
     if (timeSeconds > 0) {
       setTimeout(() => {
-        setTimeSeconds(timeSeconds - 1);
+        setTimeSeconds(timeEnd - Math.floor(Date.now() / 1000));
       }, 1000);
     } else {
       onFinishTime();
@@ -16,7 +16,7 @@ export const useTimer = (time, onFinishTime) => {
         setTimeSeconds(0);
       }, 1000);
     }
-  }, [timeSeconds, onFinishTime]);
+  }, [timeSeconds, onFinishTime, timeEnd]);
 
   useEffect(() => {
     setTimeObject(timeConverter(timeSeconds));
