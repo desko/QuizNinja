@@ -15,7 +15,12 @@ const QuizNavigation = ({customStyle = {}, quizData, submitHandler, questionNumb
       p='2rem'
       style={customStyle}>
       <Grid
-        m='-2rem'
+        m={
+          {
+            base: '-2rem',
+            md: '0',
+          }
+        }
         p={
           {
             base: '2rem',
