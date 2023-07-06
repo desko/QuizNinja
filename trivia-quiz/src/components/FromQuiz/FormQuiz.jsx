@@ -37,7 +37,7 @@ const FormQuiz = () => {
     queryFn: fetchCategories,
   });
 
-  const {setQuizData, setQuizTime} = useContext(QuizContext);
+  const {setQuizData, setQuizTime, setIsSubmitted} = useContext(QuizContext);
 
   const {
     isLoading: isLoadingQuestions,
@@ -79,6 +79,7 @@ const FormQuiz = () => {
       const data = await fetchQuestions(questionsAmount, category, difficulty);
       setQuizData(data);
       setQuizTime(Math.floor((Date.now() + (questionsAmount * SECONDS_PER_QUESTION * 1000)) / 1000));
+      setIsSubmitted(false);
       navigate(QUIZ_FIRST_QUESTION_PAGE);
     } catch (error) {
       setErrorQuiz(true);
@@ -111,7 +112,7 @@ const FormQuiz = () => {
           <FormLabel>Select Category:</FormLabel>
           <Select changeHandler={selectChangeHandler} options={quizCategories} />
 
-          <FormLabel>Choose Diffuculty:</FormLabel>
+          <FormLabel>Choose Difficulty:</FormLabel>
           <SliderDifficulty changeHandler={difficultyChangeHandler} />
 
           {(!isLoadingCount && quizQuestionCount) && (
