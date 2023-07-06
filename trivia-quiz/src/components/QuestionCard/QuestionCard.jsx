@@ -40,7 +40,7 @@ const QuestionCard = ({
           color='orange.600'
           fontWeight='700'
           textAlign='center'>
-          Question {questionNumber}
+          Category: {currentQuestion.category}
         </Heading >
         <Heading
           mt='2rem'
@@ -48,7 +48,7 @@ const QuestionCard = ({
           color='orange.600'
           fontWeight='500'
           textAlign='left'>
-          {decode(currentQuestion.question)}
+          {questionNumber}. {decode(currentQuestion.question)}
         </Heading >
       </CardHeader>
 

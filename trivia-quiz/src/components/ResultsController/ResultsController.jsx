@@ -4,6 +4,9 @@ import AccordionSingle from '../../components/AccordionSingle/AccordionSingle';
 import QuestionReview from '../../components/QuestionReview/QuestionReview';
 import {timeConverter} from '../../common/helpers';
 import {useResults} from '../../hooks/useResults';
+import {useNavigate} from 'react-router-dom';
+import Btn from '../Btn/Btn';
+import {LANDING_PAGE} from '../../common/routes';
 
 const ResultsController = () => {
   const {
@@ -15,6 +18,7 @@ const ResultsController = () => {
     score,
     quizData,
   } = useResults();
+  const navigate = useNavigate();
 
   return (
     <Card
@@ -38,7 +42,7 @@ const ResultsController = () => {
           color='orange.600'
           fontWeight='700'
           textAlign='center'>
-          You got {totalScore}%!
+          Your score {totalScore}%!
         </Heading >
         <Heading
           mt='2rem'
@@ -46,7 +50,7 @@ const ResultsController = () => {
           color='orange.600'
           fontWeight='700'
           textAlign='center'>
-          {Math.round(percentageScore)} % of the questions right and {timeScore}% for bonus time
+          You got {Math.round(percentageScore)}% of the questions right and {timeScore}% for bonus time
         </Heading >
         <Heading
           mt='2rem'
@@ -54,8 +58,8 @@ const ResultsController = () => {
           color='orange.600'
           fontWeight='700'
           textAlign='center'>
-          Time remained: {
-            (timeConverter(remainingTime).hours > 9 ?
+          {remainingTime > 0 ? (
+            'Time remained: ' + (timeConverter(remainingTime).hours > 9 ?
               timeConverter(remainingTime).hours :
               `0${timeConverter(remainingTime).hours}`) + ' : ' +
             (timeConverter(remainingTime).minutes > 9 ?
@@ -64,7 +68,9 @@ const ResultsController = () => {
             (timeConverter(remainingTime).seconds > 9 ?
               timeConverter(remainingTime).seconds :
               `0${timeConverter(remainingTime).seconds}`)
-          }
+            ) : (
+              'Your time has expired !'
+            )}
         </Heading >
         <Heading
           mt='2rem'
@@ -87,6 +93,9 @@ const ResultsController = () => {
         </Heading >
         <AccordionSingle title='Check Results' items={quizData} RenderItem={QuestionReview} />
       </CardHeader>
+      <Btn text='Back to Home' clickHandler={() => {
+        navigate(LANDING_PAGE);
+      }}/>
     </Card>
   );
 };
