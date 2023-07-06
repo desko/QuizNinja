@@ -11,44 +11,35 @@ import SliderDifficulty
 import Select from '../Select/Select';
 import SliderQuestions from '../SliderQuestions/SliderQuestions';
 import Btn from '../Btn/Btn';
-import {useQuery} from '@tanstack/react-query';
-import {fetchCategories, fetchQuestionCountByCategoryAndType, fetchQuestions} from '../../services/quiz.service';
-import {useContext, useEffect, useState} from 'react';
-import {SLIDER_DIFFICULTY, DIFFICULTY, MIN_NUMBER_OF_QUESTIONS, SECONDS_PER_QUESTION} from '../../common/constants';
+import {fetchQuestions} from '../../services/quiz.service';
+import {SLIDER_DIFFICULTY, MIN_NUMBER_OF_QUESTIONS, SECONDS_PER_QUESTION} from '../../common/constants';
 import {useNavigate} from 'react-router-dom';
 import {QUIZ_FIRST_QUESTION_PAGE} from '../../common/routes';
-import {QuizContext} from '../../context/QuizContext';
+import {useQuizForm} from '../../hooks/useQuizForm';
 import ErrorCard from '../ErrorCard/ErrorCard';
 
 const FormQuiz = () => {
   const navigate = useNavigate();
-  const [difficulty, setDifficulty] = useState(DIFFICULTY.EASY.NAME);
-  const [category, setCategory] = useState(null);
-  const [isLoadingCount, setIsLoadingCount] = useState(false);
-  const [questionsAmount, setQuestionsAmount] = useState(MIN_NUMBER_OF_QUESTIONS);
-  const [errorQuiz, setErrorQuiz] = useState(false);
 
   const {
-    isLoading: isLoadingCategs,
-    error: errorCategories,
-    data: quizCategories,
-  } = useQuery({
-    queryKey: ['quizCategories'],
-    queryFn: fetchCategories,
-  });
-
-  const {setQuizData, setQuizTime, setIsSubmitted} = useContext(QuizContext);
-
-  const {
-    isLoading: isLoadingQuestions,
-    error: errorQuestions,
-    data: quizQuestionCount,
-    refetch: refetchSliderCount,
-  } = useQuery({
-    queryKey: ['quizQuestionCount'],
-    queryFn: () => category && fetchQuestionCountByCategoryAndType(category, difficulty),
-    enabled: false,
-  });
+    questionsAmount,
+    category,
+    difficulty,
+    setQuizData,
+    setQuizTime,
+    setIsSubmitted,
+    setErrorQuiz,
+    isLoadingCategories,
+    isLoadingCount,
+    errorCategories,
+    errorQuestions,
+    errorQuiz,
+    quizCategories,
+    quizQuestionCount,
+    setDifficulty,
+    setQuestionsAmount,
+    setCategory,
+  } = useQuizForm();
 
   const difficultyChangeHandler = (e) => {
     setDifficulty(SLIDER_DIFFICULTY[e]);
@@ -64,15 +55,6 @@ const FormQuiz = () => {
     setQuestionsAmount(e);
   };
 
-  useEffect(() => {
-    setIsLoadingCount(false);
-  }, [quizQuestionCount, setIsLoadingCount]);
-
-  useEffect(() => {
-    refetchSliderCount();
-    setIsLoadingCount(true);
-  }, [difficulty, category, refetchSliderCount]);
-
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
@@ -86,7 +68,7 @@ const FormQuiz = () => {
     }
   };
 
-  if (isLoadingCategs) return <Spinner color='orange.400' size='xl' display='block' mx='auto' />;
+  if (isLoadingCategories) return <Spinner color='orange.400' size='xl' display='block' mx='auto' />;
 
   if (errorCategories || errorQuestions || errorQuiz) return <ErrorCard />;
 
