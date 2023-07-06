@@ -1,7 +1,6 @@
 import {
   FormControl,
   FormLabel,
-  FormErrorMessage,
   Card,
   CardHeader,
   Heading,
@@ -25,11 +24,15 @@ const FormQuiz = () => {
   const navigate = useNavigate();
   const [difficulty, setDifficulty] = useState(DIFFICULTY.EASY.NAME);
   const [category, setCategory] = useState(null);
-  const [isLoadingCount, setIsLoadingCount] = useState(true);
+  const [isLoadingCount, setIsLoadingCount] = useState(false);
   const [questionsAmount, setQuestionsAmount] = useState(MIN_NUMBER_OF_QUESTIONS);
   const [errorQuiz, setErrorQuiz] = useState(false);
 
-  const {isLoading: isLoadingCategs, error: errorCategories, data: quizCategories} = useQuery({
+  const {
+    isLoading: isLoadingCategs,
+    error: errorCategories,
+    data: quizCategories,
+  } = useQuery({
     queryKey: ['quizCategories'],
     queryFn: fetchCategories,
   });
@@ -49,15 +52,26 @@ const FormQuiz = () => {
 
   const difficultyChangeHandler = (e) => {
     setDifficulty(SLIDER_DIFFICULTY[e]);
+    setQuestionsAmount(MIN_NUMBER_OF_QUESTIONS);
   };
 
   const selectChangeHandler = (e) => {
     setCategory(e.target.value);
+    setQuestionsAmount(MIN_NUMBER_OF_QUESTIONS);
   };
 
   const questionsAmountChangeHandler = (e) => {
     setQuestionsAmount(e);
   };
+
+  useEffect(() => {
+    setIsLoadingCount(false);
+  }, [quizQuestionCount, setIsLoadingCount]);
+
+  useEffect(() => {
+    refetchSliderCount();
+    setIsLoadingCount(true);
+  }, [difficulty, category, refetchSliderCount]);
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -70,15 +84,6 @@ const FormQuiz = () => {
       setErrorQuiz(true);
     }
   };
-
-  useEffect(() => {
-    setIsLoadingCount(false);
-  }, [quizQuestionCount, setIsLoadingCount]);
-
-  useEffect(() => {
-    refetchSliderCount();
-    setIsLoadingCount(true);
-  }, [difficulty, category, refetchSliderCount]);
 
   if (isLoadingCategs) return <Spinner color='orange.400' size='xl' display='block' mx='auto' />;
 
@@ -105,11 +110,9 @@ const FormQuiz = () => {
         <FormControl display='contents' >
           <FormLabel>Select Category:</FormLabel>
           <Select changeHandler={selectChangeHandler} options={quizCategories} />
-          <FormErrorMessage></FormErrorMessage>
 
           <FormLabel>Choose Diffuculty:</FormLabel>
           <SliderDifficulty changeHandler={difficultyChangeHandler} />
-          <FormErrorMessage></FormErrorMessage>
 
           {(!isLoadingCount && quizQuestionCount) && (
             <>
@@ -119,7 +122,8 @@ const FormQuiz = () => {
                 changeHandler={questionsAmountChangeHandler} />
             </>
           )}
-          <FormErrorMessage></FormErrorMessage>
+
+          {isLoadingCount && category && <Spinner color='orange.400' size='xl' display='block' mx='auto' mb='2rem' />}
 
           <Btn
             disabled={(quizQuestionCount && !isLoadingCount) ? false : true}
