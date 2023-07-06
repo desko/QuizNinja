@@ -7,8 +7,8 @@ import {useNavigate} from 'react-router-dom';
 import Btn from '../../components/Btn/Btn';
 
 const LandingPage = () => {
-  const {setIsSubmitted, quizTime, quizSubmitted} = useContext(QuizContext);
-  const [activeQuiz, setActiveQuiz] = useState(false);
+  const {isSubmitted, quizTime} = useContext(QuizContext);
+  const [activeQuizTime, setActiveQuizTime] = useState(false);
   const navigate = useNavigate();
   useTitle('QuizNinja - Unleash your inner QuizNinja');
 
@@ -16,7 +16,7 @@ const LandingPage = () => {
     let time;
     const interval = setInterval(() => {
       time = 1000;
-      setActiveQuiz((quizTime - Math.floor(Date.now() / 1000)) > 0);
+      setActiveQuizTime((quizTime - Math.floor(Date.now() / 1000)) > 0);
     }, time || 0);
 
     return () => {
@@ -24,9 +24,6 @@ const LandingPage = () => {
     };
   }, [quizTime]);
 
-  useEffect(() => {
-    setIsSubmitted(false);
-  }, [setIsSubmitted]);
 
   return (
     <>
@@ -51,7 +48,7 @@ const LandingPage = () => {
         </strong>
       </Text>
       <Box display='flex' alignItems='center' justifyContent='center' flexDirection='column'>
-        {(activeQuiz && !quizSubmitted) && (
+        {(activeQuizTime && !isSubmitted) && (
           <>
             <Text
               fontWeight='bold'
