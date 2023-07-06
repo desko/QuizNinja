@@ -25,9 +25,12 @@ const ResultsController = () => {
       border={'.3rem solid'}
       borderColor='orange.400'
       borderRadius='2rem'
-      boxShadow=''
-      p='4rem 12.5%'
-      mt='2rem'>
+      p={
+        {
+          base: '2rem',
+          md: '4rem 12.5%',
+        }
+      }>
       <CardHeader p='0 0 3rem'>
         <Heading
           as='h2'
@@ -42,7 +45,7 @@ const ResultsController = () => {
           color='orange.600'
           fontWeight='700'
           textAlign='center'>
-          Your score {totalScore}%!
+          Your score {Math.round(totalScore)}%!
         </Heading >
         <Heading
           mt='2rem'
@@ -83,7 +86,12 @@ const ResultsController = () => {
         <Award color={score.COLOR} />
         <Heading
           mt='2rem'
-          maxW='75%'
+          maxW={
+            {
+              base: '90%',
+              md: '75%',
+            }
+          }
           mx='auto'
           as='h3'
           color='orange.600'

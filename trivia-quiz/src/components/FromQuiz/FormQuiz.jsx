@@ -5,6 +5,7 @@ import {
   CardHeader,
   Heading,
   Spinner,
+  Box,
 } from '@chakra-ui/react';
 import SliderDifficulty
   from '../SliderDifficulty/SliderDifficulty';
@@ -78,7 +79,12 @@ const FormQuiz = () => {
       borderColor='orange.400'
       borderRadius='2rem'
       boxShadow=''
-      p='4rem 12.5%'
+      p={
+        {
+          base: '2rem 3rem',
+          lg: '4rem 12.5%',
+        }
+      }
       mt='2rem'>
       <CardHeader p='0 0 3rem'>
         <Heading
@@ -91,22 +97,46 @@ const FormQuiz = () => {
       </CardHeader>
       <form onSubmit={submitHandler} style={{display: 'contents'}}>
         <FormControl display='contents' >
-          <FormLabel>Select Category:</FormLabel>
+          <FormLabel
+            fontSize='2xl'
+            color='orange.400'
+            fontWeight='700'>Select Category:</FormLabel>
           <Select changeHandler={selectChangeHandler} options={quizCategories} />
 
-          <FormLabel>Choose Difficulty:</FormLabel>
-          <SliderDifficulty changeHandler={difficultyChangeHandler} />
+          <FormLabel
+            fontSize='2xl'
+            color='orange.400'
+            fontWeight='700'>Choose Difficulty:</FormLabel>
+          <Box pl={
+            {
+              base: '2rem',
+              lg: '0',
+            }
+          }>
+            <SliderDifficulty changeHandler={difficultyChangeHandler} />
 
+          </Box>
           {(!isLoadingCount && quizQuestionCount) && (
             <>
-              <FormLabel>Question Count:</FormLabel>
-              <SliderQuestions
-                maxQuestions={quizQuestionCount}
-                changeHandler={questionsAmountChangeHandler} />
+              <FormLabel
+                fontSize='2xl'
+                color='orange.400'
+                fontWeight='700'>Question Count:</FormLabel>
+              <Box pl={
+                {
+                  base: '2rem',
+                  lg: '0',
+                }
+              }>
+                <SliderQuestions
+                  maxQuestions={quizQuestionCount}
+                  changeHandler={questionsAmountChangeHandler} />
+              </Box>
             </>
           )}
 
           {isLoadingCount && category && <Spinner color='orange.400' size='xl' display='block' mx='auto' mb='2rem' />}
+
 
           <Btn
             disabled={(quizQuestionCount && !isLoadingCount) ? false : true}

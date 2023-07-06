@@ -5,6 +5,7 @@ import {useNavigate} from 'react-router-dom';
 import Btn from '../../components/Btn/Btn';
 import {useActiveQuizTime} from '../../hooks/useActiveQuizTime';
 import {DOCUMENT_TITLE} from '../../common/constants';
+import Section from '../../components/Section/Section';
 
 const LandingPage = () => {
   const {activeQuizTime, isSubmitted} = useActiveQuizTime();
@@ -12,7 +13,7 @@ const LandingPage = () => {
   useTitle(DOCUMENT_TITLE.LANDING_PAGE);
 
   return (
-    <>
+    <Section>
       <Text
         p='1rem 0 4rem'
         maxW={{'base': '90%', 'md': '80%'}}
@@ -33,7 +34,7 @@ const LandingPage = () => {
             the way. Get started now and let the quiz adventure begin!
         </strong>
       </Text>
-      <Box display='flex' alignItems='center' justifyContent='center' flexDirection='column'>
+      <Box display='flex' alignItems='center' justifyContent='center' textAlign='center' flexDirection='column'>
         {(activeQuizTime && !isSubmitted) && (
           <>
             <Text
@@ -47,7 +48,7 @@ const LandingPage = () => {
         )}
       </Box>
       <FormQuiz />
-    </>
+    </Section>
   );
 };
 

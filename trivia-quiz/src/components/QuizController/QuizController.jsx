@@ -8,8 +8,10 @@ import {RESULTS_PAGE} from '../../common/routes';
 import {useNavigate} from 'react-router-dom';
 import {useContext} from 'react';
 import {QuizContext} from '../../context/QuizContext';
+import {useWindowWidth} from '../../hooks/useWindowWidth';
 
 const QuizController = () => {
+  const windowWidth = useWindowWidth();
   const {
     quizData,
     questionNumber,
@@ -30,14 +32,49 @@ const QuizController = () => {
       <Timer timeEnd={quizTime}
         onFinishTime={submitHandler}
         customStyle={{'flex': '0 0 100%'}} />
-      <QuestionCard
-        customStyle={{'flex': '0 0 calc(100% - 25rem - 2rem)'}}
-        quizData={quizData}
-        questionNumber={questionNumber}
-        currentQuestion={currentQuestion}
-        handleAnswerSelect={handleAnswerSelect}
-        submitHandler={submitHandler}/>
-      <QuizNavigation customStyle={{'flex': '0 0 25rem'}} quizData={quizData} submitHandler={submitHandler} />
+      <Flex
+        flex='0 0 100%'
+        position='relative'
+        maxW='100%'
+        flexWrap={
+          {
+            base: 'wrap',
+            md: 'wrap',
+          }
+        }
+        gap='2rem'>
+
+        <QuestionCard
+          customStyle={
+            windowWidth > 767 ?
+              {
+                flex: '0 0 calc(100% - 25rem - 2rem)',
+              } :
+              {
+                flex: '0 0 100%',
+              }
+          }
+          quizData={quizData}
+          questionNumber={questionNumber}
+          currentQuestion={currentQuestion}
+          handleAnswerSelect={handleAnswerSelect}
+          submitHandler={submitHandler}/>
+
+        <QuizNavigation
+
+          customStyle={
+            windowWidth > 767 ?
+              {
+                flex: '0 0 25rem',
+              } :
+              {
+                flex: '0 0 100%',
+              }
+          }
+          questionNumber={questionNumber}
+          quizData={quizData}
+          submitHandler={submitHandler} />
+      </Flex>
       <Progressbar customStyle={{'flex': '0 0 100%'}} quizData={quizData} />
     </Flex>
   );

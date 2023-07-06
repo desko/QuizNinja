@@ -9,7 +9,7 @@ const Timer = ({timeEnd, onFinishTime, customStyle = {}}) => {
       p='1rem 2rem'
       fontWeight='700'
       textAlign='center'
-      borderRadius='.5rem'
+      borderRadius='1rem'
       border={'.3rem solid'}
       borderColor='orange.400'
       color='orange.400'
