@@ -16,13 +16,13 @@ const SliderDifficulty = ( {changeHandler} ) => {
       mb='6rem'
       mt='1rem'
       onChange={changeHandler}>
-      <SliderMark pt='1rem' transform='translateX(-50%)' value={0}>
+      <SliderMark color='orange.400' pt='1rem' transform='translateX(-50%)' value={0}>
         {DIFFICULTY.EASY.NAME}
       </SliderMark>
-      <SliderMark pt='1rem' transform='translateX(-50%)' value={1}>
+      <SliderMark color='orange.400' pt='1rem' transform='translateX(-50%)' value={1}>
         {DIFFICULTY.MEDIUM.NAME}
       </SliderMark>
-      <SliderMark pt='1rem' transform='translateX(-50%)' value={2}>
+      <SliderMark color='orange.400' pt='1rem' transform='translateX(-50%)' value={2}>
         {DIFFICULTY.HARD.NAME}
       </SliderMark>
       <SliderTrack h='0.8rem' >

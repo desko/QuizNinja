@@ -31,8 +31,12 @@ const QuestionCard = ({
       borderColor='orange.400'
       borderRadius='2rem'
       boxShadow=''
-      p='2rem 5rem'
-      mt='2rem'
+      p={
+        {
+          base: '2rem 2rem',
+          lg: '2rem 5rem',
+        }
+      }
       style={customStyle}>
       <CardHeader p='0 0 3rem'>
         <Heading
