@@ -4,11 +4,12 @@ import {useTitle} from '../../hooks/useTitle';
 import {useNavigate} from 'react-router-dom';
 import Btn from '../../components/Btn/Btn';
 import {useActiveQuizTime} from '../../hooks/useActiveQuizTime';
+import {DOCUMENT_TITLE} from '../../common/constants';
 
 const LandingPage = () => {
   const {activeQuizTime, isSubmitted} = useActiveQuizTime();
   const navigate = useNavigate();
-  useTitle('QuizNinja - Unleash your inner QuizNinja');
+  useTitle(DOCUMENT_TITLE.LANDING_PAGE);
 
   return (
     <>

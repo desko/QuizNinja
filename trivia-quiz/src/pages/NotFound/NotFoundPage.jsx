@@ -6,11 +6,12 @@ import Container from '../../components/Container/Container';
 import NotFound from '../../assets/img/NotFound.min.png';
 import {Image} from '@chakra-ui/react';
 import {useTitle} from '../../hooks/useTitle';
+import {DOCUMENT_TITLE} from '../../common/constants';
 
 const NotFoundPage = () => {
   const navigate = useNavigate();
 
-  useTitle('QuizNinja - Not Found');
+  useTitle(DOCUMENT_TITLE.NOT_FOUND_PAGE);
 
   return (
     <Container>
