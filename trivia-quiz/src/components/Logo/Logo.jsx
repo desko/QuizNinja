@@ -5,7 +5,7 @@ import {LANDING_PAGE} from '../../common/routes';
 
 const Logo = () => {
   return (
-    <Center paddingY='2rem' width='100%'>
+    <Center pt='2rem' width='100%'>
       <Link to={LANDING_PAGE}>
         <Image
           src={QuinNinjaLogo}

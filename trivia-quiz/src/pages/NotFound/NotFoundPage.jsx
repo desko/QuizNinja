@@ -7,6 +7,7 @@ import NotFound from '../../assets/img/NotFound.min.png';
 import {Image} from '@chakra-ui/react';
 import {useTitle} from '../../hooks/useTitle';
 import {DOCUMENT_TITLE} from '../../common/constants';
+import Section from '../../components/Section/Section';
 
 const NotFoundPage = () => {
   const navigate = useNavigate();
@@ -14,7 +15,7 @@ const NotFoundPage = () => {
   useTitle(DOCUMENT_TITLE.NOT_FOUND_PAGE);
 
   return (
-    <Container>
+    <Section>
       <Flex paddingBlock='2rem 5rem' flexDir='column' alignItems='center'>
         <Heading as='h1' py='2rem' color='orange.700' textAlign='center' >Nothing to be found!</Heading>
         <Image
@@ -28,7 +29,7 @@ const NotFoundPage = () => {
           navigate(LANDING_PAGE);
         }} />
       </Flex>
-    </Container>
+    </Section>
   );
 };
 
