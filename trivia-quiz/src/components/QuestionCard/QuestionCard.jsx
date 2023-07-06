@@ -31,7 +31,7 @@ const QuestionCard = ({
       borderColor='orange.400'
       borderRadius='2rem'
       boxShadow=''
-      p='4rem 5rem'
+      p='2rem 5rem'
       mt='2rem'
       style={customStyle}>
       <CardHeader p='0 0 3rem'>
@@ -72,7 +72,7 @@ const QuestionCard = ({
           ))}
         </Grid>
       </RadioGroup>
-      <Box pt='2rem' display='flex' alignItems='center' justifyContent='space-between'>
+      <Box mt='auto' pt='2rem' display='flex' alignItems='center' justifyContent='space-between'>
         {Number(questionNumber) !== 1 &&
           <Btn text='<' clickHandler={handlePreviousQuestion} />
         }
