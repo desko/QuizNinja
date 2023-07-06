@@ -27,6 +27,7 @@ const FormQuiz = () => {
   const [category, setCategory] = useState(null);
   const [isLoadingCount, setIsLoadingCount] = useState(true);
   const [questionsAmount, setQuestionsAmount] = useState(MIN_NUMBER_OF_QUESTIONS);
+  const [errorQuiz, setErrorQuiz] = useState(false);
 
   const {isLoading: isLoadingCategs, error: errorCategories, data: quizCategories} = useQuery({
     queryKey: ['quizCategories'],
@@ -60,10 +61,14 @@ const FormQuiz = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    const data = await fetchQuestions(questionsAmount, category, difficulty);
-    setQuizData(data);
-    setQuizTime(Math.floor((Date.now() + (questionsAmount * SECONDS_PER_QUESTION * 1000)) / 1000));
-    navigate(QUIZ_FIRST_QUESTION_PAGE);
+    try {
+      const data = await fetchQuestions(questionsAmount, category, difficulty);
+      setQuizData(data);
+      setQuizTime(Math.floor((Date.now() + (questionsAmount * SECONDS_PER_QUESTION * 1000)) / 1000));
+      navigate(QUIZ_FIRST_QUESTION_PAGE);
+    } catch (error) {
+      setErrorQuiz(true);
+    }
   };
 
   useEffect(() => {
@@ -77,7 +82,7 @@ const FormQuiz = () => {
 
   if (isLoadingCategs) return <Spinner color='orange.400' size='xl' display='block' mx='auto' />;
 
-  if (errorCategories || errorQuestions) return <ErrorCard />;
+  if (errorCategories || errorQuestions || errorQuiz) return <ErrorCard />;
 
   return (
     <Card
