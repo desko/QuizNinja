@@ -13,7 +13,7 @@ const SliderQuestions = ({ maxQuestions = 20, changeHandler}) => {
   const [questions, setQuestions] = useState(MIN_NUMBER_OF_QUESTIONS);
 
   return (
-    <Slider aria-label='slider-ex-1'
+    <Slider aria-label='slider-questions'
       mb='6rem'
       mt='1rem'
       defaultValue={MIN_NUMBER_OF_QUESTIONS}

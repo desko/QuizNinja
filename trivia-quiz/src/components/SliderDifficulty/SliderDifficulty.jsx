@@ -9,7 +9,7 @@ import {DIFFICULTY} from '../../common/constants.js';
 
 const SliderDifficulty = ( {changeHandler} ) => {
   return (
-    <Slider aria-label='slider-ex-1'
+    <Slider aria-label='slider-difficulty'
       defaultValue={DIFFICULTY.EASY.VALUE}
       min={DIFFICULTY.EASY.VALUE}
       max={DIFFICULTY.HARD.VALUE}
