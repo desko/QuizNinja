@@ -3,6 +3,7 @@ import {Box} from '@chakra-ui/react';
 const Award = ({color}) => {
   return (
     <Box
+      aria-label='belt'
       maxW='20rem'
       w='100%'
       mx='auto'

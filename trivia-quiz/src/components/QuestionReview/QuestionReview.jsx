@@ -3,7 +3,7 @@ import {decode} from 'html-entities';
 
 const QuestionReview = ( {question} ) => {
   return (
-    <Card p='2rem' bgColor='gray.50' borderRadius='2rem' boxShadow='lg'>
+    <Card aria-label='Review-card' p='2rem' bgColor='gray.50' borderRadius='2rem' boxShadow='lg'>
       <Heading as='h4' pb='2rem'>{decode(question.question)}</Heading>
       <Grid templateColumns='1fr' gap='1rem'>
         {

@@ -5,6 +5,7 @@ import ConfirmationModal from '../ConfiramtionModal/ConfirmationModal';
 const QuizNavigation = ({customStyle = {}, quizData, submitHandler, questionNumber}) => {
   return (
     <Card
+      aria-label='Quiz Navigation'
       flexDirection='column'
       justifyContent='space-between'
       gap='2rem'

@@ -7,10 +7,12 @@ module.exports = {
     'plugin:react/recommended',
     'plugin:react/jsx-runtime',
     'plugin:react-hooks/recommended',
+    'plugin:cypress/recommended',
+    'plugin:chai-friendly/recommended',
   ],
   parserOptions: {ecmaVersion: 'latest', sourceType: 'module'},
   settings: {react: {version: '18.2'}},
-  plugins: ['react-refresh'],
+  plugins: ['react-refresh', 'cypress'],
   rules: {
     'react-refresh/only-export-components': 'warn',
     'require-jsdoc': 0,

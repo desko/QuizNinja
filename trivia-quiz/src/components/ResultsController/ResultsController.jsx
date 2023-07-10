@@ -85,6 +85,7 @@ const ResultsController = () => {
         </Heading >
         <Award color={score.COLOR} />
         <Heading
+          aria-label='Score-message'
           mt='2rem'
           maxW={
             {
