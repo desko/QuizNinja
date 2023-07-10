@@ -21,6 +21,10 @@ const variants = {
       padding: '.5rem',
       fontWeight: '700',
       color: 'orange.700',
+      transition: 'box-shadow .4s, background-color .4s',
+      _hover: {
+        boxShadow: '0 0 1rem .2rem var(--chakra-colors-orange-400)',
+      },
       _checked: {
         bgColor: 'orange.400',
         color: 'white',

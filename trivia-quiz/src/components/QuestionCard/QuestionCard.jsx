@@ -27,18 +27,18 @@ const QuestionCard = ({
 
   return (
     <Card
-      border={'.3rem solid'}
+      border='.3rem solid'
       borderColor='orange.400'
       borderRadius='2rem'
-      boxShadow=''
-      p={
+      padding={
         {
           base: '2rem 2rem',
           lg: '2rem 5rem',
         }
       }
-      style={customStyle}>
-      <CardHeader p='0 0 3rem'>
+      {...customStyle}>
+      <CardHeader
+        p='0 0 3rem'>
         <Heading
           as='h2'
           color='orange.600'
@@ -81,7 +81,11 @@ const QuestionCard = ({
           <Btn text='<' clickHandler={handlePreviousQuestion} />
         }
         {(Number(questionNumber) < quizData.length) &&
-        <Btn text='>' customStyle={{'marginLeft': 'auto'}} clickHandler={handleNextQuestion} />
+        <Btn text='>' customStyle={
+          {
+            ml: 'auto',
+          }
+        } clickHandler={handleNextQuestion} />
         }
         {(Number(questionNumber) === quizData.length) &&
           <ConfirmationModal submitHandler={submitHandler} />

@@ -8,10 +8,8 @@ import {RESULTS_PAGE} from '../../common/routes';
 import {useNavigate} from 'react-router-dom';
 import {useContext} from 'react';
 import {QuizContext} from '../../context/QuizContext';
-import {useWindowWidth} from '../../hooks/useWindowWidth';
 
 const QuizController = () => {
-  const windowWidth = useWindowWidth();
   const {
     quizData,
     questionNumber,
@@ -31,7 +29,11 @@ const QuizController = () => {
     <Flex flexWrap='wrap' gap='2rem'>
       <Timer timeEnd={quizTime}
         onFinishTime={submitHandler}
-        customStyle={{'flex': '0 0 100%'}} />
+        customStyle={
+          {
+            flex: '0 0 100%',
+          }
+        } />
       <Flex
         flex='0 0 100%'
         position='relative'
@@ -46,13 +48,12 @@ const QuizController = () => {
 
         <QuestionCard
           customStyle={
-            windowWidth > 767 ?
-              {
-                flex: '0 0 calc(100% - 25rem - 2rem)',
-              } :
-              {
-                flex: '0 0 100%',
-              }
+            {
+              flex: {
+                base: '0 0 100%',
+                md: '0 0 calc(100% - 25rem - 2rem)',
+              },
+            }
           }
           quizData={quizData}
           questionNumber={questionNumber}
@@ -61,21 +62,26 @@ const QuizController = () => {
           submitHandler={submitHandler}/>
 
         <QuizNavigation
-
           customStyle={
-            windowWidth > 767 ?
-              {
-                flex: '0 0 25rem',
-              } :
-              {
-                flex: '0 0 100%',
-              }
+            {
+              flex: {
+                base: '0 0 100%',
+                md: '0 0 25rem',
+              },
+            }
           }
           questionNumber={questionNumber}
           quizData={quizData}
           submitHandler={submitHandler} />
       </Flex>
-      <Progressbar customStyle={{'flex': '0 0 100%'}} quizData={quizData} />
+      <Progressbar
+        customStyle={
+          {
+            flex: '0 0 100%',
+          }
+        }
+        quizData={quizData}
+      />
     </Flex>
   );
 };
