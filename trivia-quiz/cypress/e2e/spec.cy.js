@@ -34,6 +34,47 @@ describe('QuizNinja spec', () => {
     // start quiz
     cy.get('@startQuizButton').should('not.have.attr', 'disabled');
     cy.get('@startQuizButton').click();
+
+    // gets question
+    cy.findByRole('heading', {name: /category:/i});
+
+    // click answer
+    cy.findByRole('radiogroup', {name: /question answers/i}).as('radioAnswers');
+
+    cy.get('@radioAnswers').get('label').eq(0).click();
+
+    // click other answer
+    cy.get('@radioAnswers').get('label').eq(1).click();
+
+    // navigate with arrow button
+    cy.findByRole('button', {name: />/i}).as('goNext');
+    cy.findByRole('button', {name: /</i}).should('not.exist');
+
+    // test button navigation
+    cy.get('@goNext').click();
+    cy.findByRole('button', {name: /</i}).as('goPrev');
+    cy.get('@goPrev').click();
+    cy.get('@goNext').click();
+
+    // test sidebar navigation
+
+    cy.get('[aria-label="Quiz Navigation"]').as('quizNavigation');
+    cy.get('[aria-label="Quiz Navigation"] a').as('quizNavLinks');
+
+    cy.get('@quizNavLinks').eq(0).click();
+    cy.get('@quizNavLinks').eq(1).click();
+    cy.get('@quizNavLinks').eq(-1).click();
+
+    // click nav submit button
+
+    cy.get('[aria-label="Quiz Navigation"] button').as('btnSubmit');
+    cy.get('@btnSubmit').click();
+
+    cy.findByRole('button', {name: /no/i}).click();
+    cy.get('@btnSubmit').click();
+    cy.findByRole('button', {name: /yes/i}).click();
+
+    cy.findByRole('heading', {name: /correct answers/i});
   });
 });
 

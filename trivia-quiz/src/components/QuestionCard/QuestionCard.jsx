@@ -27,6 +27,7 @@ const QuestionCard = ({
 
   return (
     <Card
+      aria-label='Question Card'
       border='.3rem solid'
       borderColor='orange.400'
       borderRadius='2rem'
@@ -56,12 +57,16 @@ const QuestionCard = ({
         </Heading >
       </CardHeader>
 
-      <RadioGroup onChange={handleAnswerSelect} value={currentQuestion.selectedAnswer}>
+      <RadioGroup
+        aria-label='Question Answers'
+        onChange={handleAnswerSelect}
+        value={currentQuestion.selectedAnswer}>
         <Grid templateColumns='1fr' gap='1rem'>
           {currentQuestion?.answers?.map((answer) => (
 
             <GridItem key={answer}>
               <Radio
+                aria-label='answer'
                 value={answer}
                 size='lg'
                 width='100%'
