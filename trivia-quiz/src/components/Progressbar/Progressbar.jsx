@@ -11,7 +11,7 @@ const Progressbar = ({customStyle = {}, quizData}) => {
   }, [quizData]);
 
   return (
-    <Box style={customStyle}>
+    <Box {...customStyle}>
       <Text>Progress: {Math.round(progress)}%</Text>
       <Progress hasStripe value={progress} size='xl' colorScheme='orange' height='2rem' />
     </Box>

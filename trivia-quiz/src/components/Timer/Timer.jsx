@@ -1,11 +1,11 @@
-import {Box} from '@chakra-ui/react';
+import {chakra} from '@chakra-ui/react';
 import {useTimer} from '../../hooks/useTimer';
 
 const Timer = ({timeEnd, onFinishTime, customStyle = {}}) => {
   const timeObject = useTimer(timeEnd, onFinishTime);
 
   return (
-    <Box
+    <chakra.div
       p='1rem 2rem'
       fontWeight='700'
       textAlign='center'
@@ -13,7 +13,7 @@ const Timer = ({timeEnd, onFinishTime, customStyle = {}}) => {
       border={'.3rem solid'}
       borderColor='orange.400'
       color='orange.400'
-      style={customStyle}>
+      {...customStyle}>
       <span>
         {
           (timeObject.hours > 9 ? timeObject.hours : `0${timeObject.hours}`) + ' : ' +
@@ -21,7 +21,7 @@ const Timer = ({timeEnd, onFinishTime, customStyle = {}}) => {
           (timeObject.seconds > 9 ? timeObject.seconds : `0${timeObject.seconds}`)
         }
       </span>
-    </Box>
+    </chakra.div>
   );
 };
 

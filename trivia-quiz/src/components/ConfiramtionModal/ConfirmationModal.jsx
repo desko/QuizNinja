@@ -16,26 +16,20 @@ const ConfirmationModal = ({submitHandler}) => {
     <>
       <Btn text='Submit' clickHandler={onOpen} />
 
-      <Modal blockScrollOnMount={false} isOpen={isOpen} onClose={onClose}>
+      <Modal
+        variant='custom'
+        blockScrollOnMount={false}
+        isOpen={isOpen}
+        onClose={onClose}>
         <ModalOverlay />
-        <ModalContent
-          border={'.3rem solid'}
-          borderColor='orange.400'
-          borderRadius='2rem'
-          p='6rem 3rem 1rem 3rem'
-          display='flex'
-          m='auto'
-          width='calc(100% - 4rem)' maxWidth={{'sm': '100%',
-            'md': '100%',
-            'lg': '60rem',
-          }} paddingX='2rem'>
+        <ModalContent>
           <ModalCloseButton />
           <ModalBody>
             <Text fontWeight='500' mb='1rem'>
                 Are you sure you want to submit? Once submitted, you will not be able to make any changes.
             </Text>
           </ModalBody>
-          <ModalFooter gap='2rem'>
+          <ModalFooter>
             <Btn text='Yes' clickHandler={submitHandler}/>
             <Btn text='No' clickHandler={onClose}/>
           </ModalFooter>
