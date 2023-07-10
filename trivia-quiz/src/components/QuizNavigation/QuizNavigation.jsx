@@ -11,9 +11,8 @@ const QuizNavigation = ({customStyle = {}, quizData, submitHandler, questionNumb
       border={'.3rem solid'}
       borderColor='orange.400'
       borderRadius='2rem'
-      boxShadow=''
       p='2rem'
-      style={customStyle}>
+      {...customStyle}>
       <Grid
         m={
           {
@@ -68,7 +67,15 @@ const QuizNavigation = ({customStyle = {}, quizData, submitHandler, questionNumb
           }
 
           return (
-            <GridItem key={index}
+            <GridItem
+              key={index}
+              transition='box-shadow .4s'
+              _hover={
+                {
+                  borderRadius: '.5rem',
+                  boxShadow: '0 0 1rem .2rem var(--chakra-colors-orange-400)',
+                }
+              }
             >
               <NavLink to={`/quiz/questions/${index + 1}`}
                 style={{
@@ -83,6 +90,7 @@ const QuizNavigation = ({customStyle = {}, quizData, submitHandler, questionNumb
                   borderRadius: '.5rem',
                   aspectRatio: '1/1',
                   userSelect: 'none',
+                  transition: 'background-color .4s, color .4s',
                 }}
               >
                 {index + 1}
