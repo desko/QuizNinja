@@ -3,6 +3,7 @@ import {radioTheme} from './RadioTheme';
 import {selectTheme} from './SelectTheme';
 import {buttonTheme} from './ButtonTheme';
 import {accordionTheme} from './AccordionTheme';
+import {modalTheme} from './ModalTheme';
 
 const theme = extendTheme({
   components: {
@@ -10,6 +11,7 @@ const theme = extendTheme({
     Select: selectTheme,
     Button: buttonTheme,
     Accordion: accordionTheme,
+    Modal: modalTheme,
   },
 });
 
