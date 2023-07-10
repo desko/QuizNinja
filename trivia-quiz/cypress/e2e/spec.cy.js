@@ -74,7 +74,25 @@ describe('QuizNinja spec', () => {
     cy.get('@btnSubmit').click();
     cy.findByRole('button', {name: /yes/i}).click();
 
+
+    // results
     cy.findByRole('heading', {name: /correct answers/i});
+    cy.findByRole('heading', {name: /your score/i});
+    cy.findByRole('heading', {name: /you got/i});
+    cy.findByRole('heading', {name: /time remained:/i});
+    cy.findByRole('heading', {name: /you earned:/i});
+    cy.get('[aria-label="belt"]');
+    cy.findByRole('heading', {name: /score\-message/i});
+    cy.findByRole('button', {name: /check results/i}).as('checkResults');
+    cy.findByRole('region', {name: /check results/i}).should('not.exist');
+
+    // check results accordion
+    cy.get('@checkResults').click();
+    cy.get('[aria-label="Review-card"]').as('reviewCard');
+    cy.get('@reviewCard').should('have.length', 5);
+
+    // return home after quiz is finished and reviewed
+    cy.findByRole('button', {name: /back to home/i}).click();
   });
 });
 
